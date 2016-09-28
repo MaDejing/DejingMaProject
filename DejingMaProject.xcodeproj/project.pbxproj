@@ -14,6 +14,8 @@
 		CF31AAD41D9B5395002CF8E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF31AAD21D9B5395002CF8E3 /* LaunchScreen.storyboard */; };
 		CF31AADF1D9B5396002CF8E3 /* DejingMaProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AADE1D9B5396002CF8E3 /* DejingMaProjectTests.swift */; };
 		CF31AAEA1D9B5396002CF8E3 /* DejingMaProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AAE91D9B5396002CF8E3 /* DejingMaProjectUITests.swift */; };
+		CF31AAF81D9B5914002CF8E3 /* ChangeStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AAF71D9B5913002CF8E3 /* ChangeStatusVC.swift */; };
+		CF31AAFA1D9B6D4C002CF8E3 /* DoubleScrollVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AAF91D9B6D4C002CF8E3 /* DoubleScrollVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		CF31AAE51D9B5396002CF8E3 /* DejingMaProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DejingMaProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF31AAE91D9B5396002CF8E3 /* DejingMaProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DejingMaProjectUITests.swift; sourceTree = "<group>"; };
 		CF31AAEB1D9B5396002CF8E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CF31AAF71D9B5913002CF8E3 /* ChangeStatusVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeStatusVC.swift; sourceTree = "<group>"; };
+		CF31AAF91D9B6D4C002CF8E3 /* DoubleScrollVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleScrollVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 			children = (
 				CF31AAC91D9B5395002CF8E3 /* AppDelegate.swift */,
 				CF31AACB1D9B5395002CF8E3 /* ViewController.swift */,
+				CF31AAF71D9B5913002CF8E3 /* ChangeStatusVC.swift */,
+				CF31AAF91D9B6D4C002CF8E3 /* DoubleScrollVC.swift */,
 				CF31AACD1D9B5395002CF8E3 /* Main.storyboard */,
 				CF31AAD01D9B5395002CF8E3 /* Assets.xcassets */,
 				CF31AAD21D9B5395002CF8E3 /* LaunchScreen.storyboard */,
@@ -264,6 +270,8 @@
 			files = (
 				CF31AACC1D9B5395002CF8E3 /* ViewController.swift in Sources */,
 				CF31AACA1D9B5395002CF8E3 /* AppDelegate.swift in Sources */,
+				CF31AAFA1D9B6D4C002CF8E3 /* DoubleScrollVC.swift in Sources */,
+				CF31AAF81D9B5914002CF8E3 /* ChangeStatusVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,8 +423,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ABA34B2Y3Y;
 				INFOPLIST_FILE = DejingMaProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.DejingMa.DejingMaProject;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DejingMa.textfieldText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -428,8 +437,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ABA34B2Y3Y;
 				INFOPLIST_FILE = DejingMaProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.DejingMa.DejingMaProject;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DejingMa.textfieldText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -512,6 +522,7 @@
 				CF31AAF01D9B5396002CF8E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CF31AAF11D9B5396002CF8E3 /* Build configuration list for PBXNativeTarget "DejingMaProjectTests" */ = {
 			isa = XCConfigurationList;
@@ -520,6 +531,7 @@
 				CF31AAF31D9B5396002CF8E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CF31AAF41D9B5396002CF8E3 /* Build configuration list for PBXNativeTarget "DejingMaProjectUITests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +540,7 @@
 				CF31AAF61D9B5396002CF8E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
