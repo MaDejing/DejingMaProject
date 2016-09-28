@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C0D98231D9C3A0A006C493D /* HitTestScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0D98221D9C3A0A006C493D /* HitTestScrollView.swift */; };
 		CF31AACA1D9B5395002CF8E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AAC91D9B5395002CF8E3 /* AppDelegate.swift */; };
 		CF31AACC1D9B5395002CF8E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AACB1D9B5395002CF8E3 /* ViewController.swift */; };
 		CF31AACF1D9B5395002CF8E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF31AACD1D9B5395002CF8E3 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7C0D98221D9C3A0A006C493D /* HitTestScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitTestScrollView.swift; sourceTree = "<group>"; };
 		CF31AAC61D9B5395002CF8E3 /* DejingMaProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DejingMaProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF31AAC91D9B5395002CF8E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF31AACB1D9B5395002CF8E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				CF31AACB1D9B5395002CF8E3 /* ViewController.swift */,
 				CF31AAF71D9B5913002CF8E3 /* ChangeStatusVC.swift */,
 				CF31AAF91D9B6D4C002CF8E3 /* DoubleScrollVC.swift */,
+				7C0D98221D9C3A0A006C493D /* HitTestScrollView.swift */,
 				CF31AACD1D9B5395002CF8E3 /* Main.storyboard */,
 				CF31AAD01D9B5395002CF8E3 /* Assets.xcassets */,
 				CF31AAD21D9B5395002CF8E3 /* LaunchScreen.storyboard */,
@@ -270,6 +273,7 @@
 			files = (
 				CF31AACC1D9B5395002CF8E3 /* ViewController.swift in Sources */,
 				CF31AACA1D9B5395002CF8E3 /* AppDelegate.swift in Sources */,
+				7C0D98231D9C3A0A006C493D /* HitTestScrollView.swift in Sources */,
 				CF31AAFA1D9B6D4C002CF8E3 /* DoubleScrollVC.swift in Sources */,
 				CF31AAF81D9B5914002CF8E3 /* ChangeStatusVC.swift in Sources */,
 			);
