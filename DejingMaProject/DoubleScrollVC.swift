@@ -12,10 +12,26 @@ import UIKit
 
 class DoubleScrollVC: UIViewController {
 
+    @IBOutlet weak var headerView: UIView!
+    
+    @IBOutlet weak var headerViewTop: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewA: UIScrollView!
+    @IBOutlet weak var scrollViewB: UIScrollView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        for ges in scrollViewA.gestureRecognizers! {
+            scrollViewA.removeGestureRecognizer(ges)
+        }
+        
+        for ges in scrollViewB.gestureRecognizers! {
+            scrollViewA.addGestureRecognizer(ges)
+        }
+        
+        scrollViewB.addObserver(self, forKeyPath: "contentOffset", options: .new, context: nil)
 
     }
 	
@@ -39,5 +55,10 @@ class DoubleScrollVC: UIViewController {
 	@IBAction func popVC(_ sender: AnyObject) {
 		_ = navigationController?.popViewController(animated: true)
 	}
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        let offset: CGPoint = scrollViewB.contentOffset
+        headerViewTop.constant = -max(offset.y, 0)
+    }
 
 }
