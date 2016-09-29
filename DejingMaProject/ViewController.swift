@@ -61,8 +61,6 @@ class ViewController: UIViewController {
 		let vc = storyboard?.instantiateViewController(withIdentifier: "ChangeStatusVC") as! ChangeStatusVC
 		let nav = UINavigationController(rootViewController: vc)
 		present(nav, animated: true, completion: nil)
-		
-//		navigationController?.pushViewController(vc, animated: true)
 	}
 
 	@IBAction func pushToDoubleScroll(_ sender: AnyObject) {

@@ -47,6 +47,10 @@ class DoubleScrollVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+	
+	deinit {
+		scrollViewB.removeObserver(self, forKeyPath: "contentOffset")
+	}
 }
 
 extension DoubleScrollVC {
