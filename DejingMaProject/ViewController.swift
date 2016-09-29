@@ -49,7 +49,7 @@ class ViewController: UIViewController {
 		let obj3 = obj1.mutableCopy() as! secondObject
 		obj2.a = 2
 		obj3.a = 3
-		print(obj1.a, obj2.a, obj3.a)
+//		print(obj1.a, obj2.a, obj3.a)
 	}
 
 	override func didReceiveMemoryWarning() {

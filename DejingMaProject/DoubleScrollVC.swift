@@ -12,24 +12,25 @@ class DoubleScrollVC: UIViewController {
 
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var headerViewTop: NSLayoutConstraint!
+	@IBOutlet weak var headerViewHeight: NSLayoutConstraint!
+	@IBOutlet weak var alphaViewTop: NSLayoutConstraint!
     @IBOutlet weak var scrollViewA: UIScrollView!
-    @IBOutlet weak var scrollViewB: UIScrollView!
-    
+	@IBOutlet weak var tableView: UITableView!
+	
+	fileprivate var historyOffsetY: CGFloat!
+	fileprivate var isEndDrag: Bool!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        for ges in scrollViewA.gestureRecognizers! {
-            scrollViewA.removeGestureRecognizer(ges)
-        }
-        
-        for ges in scrollViewB.gestureRecognizers! {
-            scrollViewA.addGestureRecognizer(ges)
-        }
-        
-        scrollViewB.addObserver(self, forKeyPath: "contentOffset", options: .new, context: nil)
-    }
+		
+		updateGestures()
+		updateTableView()
+		
+		addObservers()
+		addTableViewRefresh()
+	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -49,35 +50,166 @@ class DoubleScrollVC: UIViewController {
     }
 	
 	deinit {
-		scrollViewB.removeObserver(self, forKeyPath: "contentOffset")
+		removeObservers()
+		removeTableViewRefresh()
 	}
 }
 
 extension DoubleScrollVC {
+	
+	fileprivate func addObservers() {
+		tableView.addObserver(self, forKeyPath: "contentOffset", options: .new, context: nil)
+	}
+	
+	fileprivate func removeObservers() {
+		tableView.removeObserver(self, forKeyPath: "contentOffset")
+	}
+	
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        let offset: CGPoint = scrollViewB.contentOffset
-        headerViewTop.constant = -max(offset.y, 0)
+        let offset: CGPoint = tableView.contentOffset
+		
+		if tableView.isDragging {
+			headerViewTop.constant = min(-offset.y, 0)
+			alphaViewTop.constant = max(offset.y/4, 0)
+		}
     }
+	
+	fileprivate func addTableViewRefresh() {
+		let refreshView = MyRefreshView()
+		refreshView.frame.size.height = 40
+		
+		let refresher = PullToRefresh(refreshView: refreshView, animator: MyViewAnimator(animateView: refreshView), height: 40, position: .top)
+		refresher.animationDuration = 0.5
+		refresher.springDamping = 1
+		
+		tableView.addPullToRefresh(refresher) { [weak self] in
+			let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+			DispatchQueue.main.asyncAfter(deadline: delayTime) {
+				self?.tableView.endRefreshing(at: .top)
+			}
+		}
+		
+//		tableView.startRefreshing(at: .top)
+	}
+	
+	fileprivate func removeTableViewRefresh() {
+		tableView.removePullToRefresh(tableView.topPullToRefresh!)
+	}
+
+}
+
+extension DoubleScrollVC {
+	fileprivate func updateGestures() {
+		for ges in scrollViewA.gestureRecognizers! {
+			scrollViewA.removeGestureRecognizer(ges)
+		}
+		
+		for ges in tableView.gestureRecognizers! {
+			tableView.addGestureRecognizer(ges)
+		}
+	}
+	
+	fileprivate func updateTableView() {
+		tableView.scrollIndicatorInsets = UIEdgeInsetsMake(headerViewHeight.constant, 0, 0, 0)
+	}
+}
+
+extension DoubleScrollVC: UIScrollViewDelegate {
+	
+	func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+		guard tableView == scrollView else { return }
+
+		historyOffsetY = scrollView.contentOffset.y
+	}
+	
+	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		guard tableView == scrollView else { return }
+		
+		let offset = scrollView.contentOffset
+		
+		if !decelerate{
+			if (offset.y > historyOffsetY && historyOffsetY >= 0) ||
+				(offset.y < historyOffsetY && historyOffsetY > 0) {
+				
+				updateViewAfterScroll(scrollView: scrollView)
+			}
+		}
+	}
+	
+	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+		guard tableView == scrollView else { return }
+		
+		updateViewAfterScroll(scrollView: scrollView)
+	}
+	
+	func updateViewAfterScroll(scrollView: UIScrollView) {
+		let offset = scrollView.contentOffset
+
+		if offset.y < 60 {
+			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [.curveLinear], animations: {
+				self.headerViewTop.constant = 0
+				self.alphaViewTop.constant = 0
+				self.tableView.contentOffset.y = 0
+				
+				self.headerView.layoutIfNeeded()
+				self.view.layoutIfNeeded()
+				}, completion: nil)
+			
+		} else {
+			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [.curveLinear], animations: {
+				self.headerViewTop.constant = min(-150, -offset.y)
+				self.alphaViewTop.constant = max(150, offset.y)/4
+				self.tableView.contentOffset.y = max(150, offset.y)
+				
+				self.headerView.layoutIfNeeded()
+				self.view.layoutIfNeeded()
+				}, completion: nil)
+		}
+	}
 }
 
 extension DoubleScrollVC {
     @IBAction func popVC(_ sender: AnyObject) {
 		_ = navigationController?.popViewController(animated: true)
 	}
-    
-    @IBAction func onClick1(_ sender: AnyObject) {
-        print("onClick1")
-    }
+}
 
-    @IBAction func onClick2(_ sender: AnyObject) {
-        print("onClick2")
-    }
-    
-    @IBAction func onClick3(_ sender: AnyObject) {
-        print("onClick3")
-    }
-    
-    @IBAction func onClick4(_ sender: AnyObject) {
-        print("onClick4")
-    }
+extension DoubleScrollVC: UITableViewDelegate, UITableViewDataSource {
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return 4
+	}
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		switch section {
+		case 0, 2 :
+			return 1
+		case 1:
+			return 20
+		case 3:
+			return 3
+		default:
+			return 0
+		}
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		var cell: UITableViewCell!
+		switch indexPath.section {
+		case 0:
+			cell = tableView.dequeueReusableCell(withIdentifier: "topCell", for: indexPath)
+		default:
+			cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+		}
+		
+		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		switch indexPath.section {
+		case 0:
+			return headerViewHeight.constant
+		default:
+			return 80
+		}
+	}
 }

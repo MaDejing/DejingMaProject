@@ -17,6 +17,15 @@
 		CF31AAEA1D9B5396002CF8E3 /* DejingMaProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AAE91D9B5396002CF8E3 /* DejingMaProjectUITests.swift */; };
 		CF31AAF81D9B5914002CF8E3 /* ChangeStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AAF71D9B5913002CF8E3 /* ChangeStatusVC.swift */; };
 		CF31AAFA1D9B6D4C002CF8E3 /* DoubleScrollVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AAF91D9B6D4C002CF8E3 /* DoubleScrollVC.swift */; };
+		CF45CD351D9CD8B200369340 /* DefaultRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD2D1D9CD8B200369340 /* DefaultRefreshView.swift */; };
+		CF45CD361D9CD8B200369340 /* DefaultViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD2E1D9CD8B200369340 /* DefaultViewAnimator.swift */; };
+		CF45CD371D9CD8B200369340 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF45CD2F1D9CD8B200369340 /* Info.plist */; };
+		CF45CD381D9CD8B200369340 /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD311D9CD8B200369340 /* PullToRefresh.swift */; };
+		CF45CD391D9CD8B200369340 /* RefreshViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD321D9CD8B200369340 /* RefreshViewAnimator.swift */; };
+		CF45CD3A1D9CD8B200369340 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD331D9CD8B200369340 /* State.swift */; };
+		CF45CD3B1D9CD8B200369340 /* UIScrollView+PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD341D9CD8B200369340 /* UIScrollView+PullToRefresh.swift */; };
+		CF45CD3D1D9CE06D00369340 /* MyViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD3C1D9CE06D00369340 /* MyViewAnimator.swift */; };
+		CF45CD3F1D9CE23C00369340 /* MyRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD3E1D9CE23C00369340 /* MyRefreshView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +62,16 @@
 		CF31AAEB1D9B5396002CF8E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF31AAF71D9B5913002CF8E3 /* ChangeStatusVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeStatusVC.swift; sourceTree = "<group>"; };
 		CF31AAF91D9B6D4C002CF8E3 /* DoubleScrollVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleScrollVC.swift; sourceTree = "<group>"; };
+		CF45CD2D1D9CD8B200369340 /* DefaultRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRefreshView.swift; sourceTree = "<group>"; };
+		CF45CD2E1D9CD8B200369340 /* DefaultViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewAnimator.swift; sourceTree = "<group>"; };
+		CF45CD2F1D9CD8B200369340 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CF45CD301D9CD8B200369340 /* PullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefresh.h; sourceTree = "<group>"; };
+		CF45CD311D9CD8B200369340 /* PullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
+		CF45CD321D9CD8B200369340 /* RefreshViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshViewAnimator.swift; sourceTree = "<group>"; };
+		CF45CD331D9CD8B200369340 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		CF45CD341D9CD8B200369340 /* UIScrollView+PullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+PullToRefresh.swift"; sourceTree = "<group>"; };
+		CF45CD3C1D9CE06D00369340 /* MyViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewAnimator.swift; sourceTree = "<group>"; };
+		CF45CD3E1D9CE23C00369340 /* MyRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRefreshView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +102,7 @@
 		CF31AABD1D9B5395002CF8E3 = {
 			isa = PBXGroup;
 			children = (
+				CF45CD2C1D9CD8B200369340 /* PullToRefresh */,
 				CF31AAC81D9B5395002CF8E3 /* DejingMaProject */,
 				CF31AADD1D9B5396002CF8E3 /* DejingMaProjectTests */,
 				CF31AAE81D9B5396002CF8E3 /* DejingMaProjectUITests */,
@@ -112,6 +132,8 @@
 				CF31AAD01D9B5395002CF8E3 /* Assets.xcassets */,
 				CF31AAD21D9B5395002CF8E3 /* LaunchScreen.storyboard */,
 				CF31AAD51D9B5395002CF8E3 /* Info.plist */,
+				CF45CD3E1D9CE23C00369340 /* MyRefreshView.swift */,
+				CF45CD3C1D9CE06D00369340 /* MyViewAnimator.swift */,
 			);
 			path = DejingMaProject;
 			sourceTree = "<group>";
@@ -132,6 +154,21 @@
 				CF31AAEB1D9B5396002CF8E3 /* Info.plist */,
 			);
 			path = DejingMaProjectUITests;
+			sourceTree = "<group>";
+		};
+		CF45CD2C1D9CD8B200369340 /* PullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				CF45CD2D1D9CD8B200369340 /* DefaultRefreshView.swift */,
+				CF45CD2E1D9CD8B200369340 /* DefaultViewAnimator.swift */,
+				CF45CD2F1D9CD8B200369340 /* Info.plist */,
+				CF45CD301D9CD8B200369340 /* PullToRefresh.h */,
+				CF45CD311D9CD8B200369340 /* PullToRefresh.swift */,
+				CF45CD321D9CD8B200369340 /* RefreshViewAnimator.swift */,
+				CF45CD331D9CD8B200369340 /* State.swift */,
+				CF45CD341D9CD8B200369340 /* UIScrollView+PullToRefresh.swift */,
+			);
+			path = PullToRefresh;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,6 +281,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF45CD371D9CD8B200369340 /* Info.plist in Resources */,
 				CF31AAD41D9B5395002CF8E3 /* LaunchScreen.storyboard in Resources */,
 				CF31AAD11D9B5395002CF8E3 /* Assets.xcassets in Resources */,
 				CF31AACF1D9B5395002CF8E3 /* Main.storyboard in Resources */,
@@ -271,11 +309,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF45CD351D9CD8B200369340 /* DefaultRefreshView.swift in Sources */,
 				CF31AACC1D9B5395002CF8E3 /* ViewController.swift in Sources */,
+				CF45CD3B1D9CD8B200369340 /* UIScrollView+PullToRefresh.swift in Sources */,
 				CF31AACA1D9B5395002CF8E3 /* AppDelegate.swift in Sources */,
+				CF45CD3A1D9CD8B200369340 /* State.swift in Sources */,
 				7C0D98231D9C3A0A006C493D /* HitTestScrollView.swift in Sources */,
+				CF45CD391D9CD8B200369340 /* RefreshViewAnimator.swift in Sources */,
 				CF31AAFA1D9B6D4C002CF8E3 /* DoubleScrollVC.swift in Sources */,
+				CF45CD381D9CD8B200369340 /* PullToRefresh.swift in Sources */,
+				CF45CD361D9CD8B200369340 /* DefaultViewAnimator.swift in Sources */,
 				CF31AAF81D9B5914002CF8E3 /* ChangeStatusVC.swift in Sources */,
+				CF45CD3F1D9CE23C00369340 /* MyRefreshView.swift in Sources */,
+				CF45CD3D1D9CE06D00369340 /* MyViewAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

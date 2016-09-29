@@ -16,8 +16,6 @@ class HitTestScrollView: UIScrollView {
             
             let hitView = subView.hitTest(newPoint, with: event)
             if hitView != nil {
-//                print(point, newPoint)
-
                 return hitView!
             }
         }
