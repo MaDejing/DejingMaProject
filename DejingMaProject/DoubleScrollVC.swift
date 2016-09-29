@@ -13,12 +13,17 @@ class DoubleScrollVC: UIViewController {
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var headerViewTop: NSLayoutConstraint!
 	@IBOutlet weak var headerViewHeight: NSLayoutConstraint!
+	
+	@IBOutlet weak var alphaView: UIView!
+	@IBOutlet weak var alphaViewHeight: NSLayoutConstraint!
 	@IBOutlet weak var alphaViewTop: NSLayoutConstraint!
+	
     @IBOutlet weak var scrollViewA: UIScrollView!
 	@IBOutlet weak var tableView: UITableView!
 	
 	fileprivate var historyOffsetY: CGFloat!
-	fileprivate var isEndDrag: Bool!
+	let maxMoveDistance: CGFloat = 50.0
+	let multiAlphaViewTop: CGFloat = 3.0
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,8 +75,10 @@ extension DoubleScrollVC {
 		
 		if tableView.isDragging {
 			headerViewTop.constant = min(-offset.y, 0)
-			alphaViewTop.constant = max(offset.y/4, 0)
+			alphaViewTop.constant = max(offset.y/multiAlphaViewTop, 0)
 		}
+		
+		alphaView.alpha = 1 - offset.y/maxMoveDistance
     }
 	
 	fileprivate func addTableViewRefresh() {
@@ -145,7 +152,9 @@ extension DoubleScrollVC: UIScrollViewDelegate {
 	func updateViewAfterScroll(scrollView: UIScrollView) {
 		let offset = scrollView.contentOffset
 
-		if offset.y < 60 {
+		guard offset.y >= 0 else { return }
+		
+		if offset.y < maxMoveDistance {
 			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [.curveLinear], animations: {
 				self.headerViewTop.constant = 0
 				self.alphaViewTop.constant = 0
@@ -157,9 +166,9 @@ extension DoubleScrollVC: UIScrollViewDelegate {
 			
 		} else {
 			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [.curveLinear], animations: {
-				self.headerViewTop.constant = min(-150, -offset.y)
-				self.alphaViewTop.constant = max(150, offset.y)/4
-				self.tableView.contentOffset.y = max(150, offset.y)
+				self.headerViewTop.constant = min(-self.alphaViewHeight.constant, -offset.y)
+				self.alphaViewTop.constant = max(self.alphaViewHeight.constant, offset.y)/self.multiAlphaViewTop
+				self.tableView.contentOffset.y = max(self.alphaViewHeight.constant, offset.y)
 				
 				self.headerView.layoutIfNeeded()
 				self.view.layoutIfNeeded()
@@ -202,6 +211,11 @@ extension DoubleScrollVC: UITableViewDelegate, UITableViewDataSource {
 		}
 		
 		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
+		
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
