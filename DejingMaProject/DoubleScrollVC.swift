@@ -18,12 +18,21 @@ class DoubleScrollVC: UIViewController {
 	@IBOutlet weak var alphaViewHeight: NSLayoutConstraint!
 	@IBOutlet weak var alphaViewTop: NSLayoutConstraint!
 	
+	@IBOutlet weak var refreshViewBottom: NSLayoutConstraint!
+	@IBOutlet weak var refreshImage: UIImageView!
+	
     @IBOutlet weak var scrollViewA: UIScrollView!
 	@IBOutlet weak var tableView: UITableView!
 	
 	fileprivate var historyOffsetY: CGFloat!
-	let maxMoveDistance: CGFloat = 50.0
-	let multiAlphaViewTop: CGFloat = 3.0
+	fileprivate let maxMoveDistance: CGFloat = 50.0
+	fileprivate let multiAlphaViewTop: CGFloat = 3.0
+	
+	fileprivate var chooseView: UIView!
+	fileprivate var modalView: UIView!
+	fileprivate var chooseViewHeight: CGFloat!
+	
+	fileprivate var topPullToRefresher: PullToRefresh!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,18 +87,23 @@ extension DoubleScrollVC {
 			alphaViewTop.constant = max(offset.y/multiAlphaViewTop, 0)
 		}
 		
-		alphaView.alpha = 1 - offset.y/maxMoveDistance
+		if offset.y <= 0 {
+			refreshViewBottom.constant = -offset.y
+			refreshImage.alpha = max(0, min(0.3 + 0.7 * -offset.y / 16, 1))
+		}
+		
+		alphaView.alpha = max(0, min(1 - offset.y/maxMoveDistance, 1))
     }
 	
 	fileprivate func addTableViewRefresh() {
 		let refreshView = MyRefreshView()
 		refreshView.frame.size.height = 40
 		
-		let refresher = PullToRefresh(refreshView: refreshView, animator: MyViewAnimator(animateView: refreshView), height: 40, position: .top)
-		refresher.animationDuration = 0.5
-		refresher.springDamping = 1
+		topPullToRefresher = PullToRefresh(refreshView: refreshView, animator: MyViewAnimator(animateView: refreshView), height: 40, position: .top)
+		topPullToRefresher.animationDuration = 0.5
+		topPullToRefresher.springDamping = 1
 		
-		tableView.addPullToRefresh(refresher) { [weak self] in
+		tableView.addPullToRefresh(topPullToRefresher) { [weak self] in
 			let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
 			DispatchQueue.main.asyncAfter(deadline: delayTime) {
 				self?.tableView.endRefreshing(at: .top)
@@ -118,6 +132,13 @@ extension DoubleScrollVC {
 	
 	fileprivate func updateTableView() {
 		tableView.scrollIndicatorInsets = UIEdgeInsetsMake(headerViewHeight.constant, 0, 0, 0)
+//		tableView.decelerationRate = 0.1
+	}
+}
+
+extension DoubleScrollVC {
+    @IBAction func popVC(_ sender: AnyObject) {
+		_ = navigationController?.popViewController(animated: true)
 	}
 }
 
@@ -153,64 +174,101 @@ extension DoubleScrollVC: UIScrollViewDelegate {
 		let offset = scrollView.contentOffset
 
 		guard offset.y >= 0 else { return }
+
+		let newHeaderViewTop = offset.y < maxMoveDistance ? 0 : min(-self.alphaViewHeight.constant, -offset.y)
+		let newAlphaViewTop = offset.y < maxMoveDistance ? 0 : max(self.alphaViewHeight.constant, offset.y)/self.multiAlphaViewTop
+		let newOffsetY = offset.y < maxMoveDistance ? 0 : max(self.alphaViewHeight.constant, offset.y)
 		
-		if offset.y < maxMoveDistance {
-			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [.curveLinear], animations: {
-				self.headerViewTop.constant = 0
-				self.alphaViewTop.constant = 0
-				self.tableView.contentOffset.y = 0
-				
-				self.headerView.layoutIfNeeded()
-				self.view.layoutIfNeeded()
-				}, completion: nil)
+		UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [.curveLinear], animations: {
+			self.headerViewTop.constant = newHeaderViewTop
+			self.alphaViewTop.constant = newAlphaViewTop
+			self.tableView.contentOffset.y = newOffsetY
 			
-		} else {
-			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [.curveLinear], animations: {
-				self.headerViewTop.constant = min(-self.alphaViewHeight.constant, -offset.y)
-				self.alphaViewTop.constant = max(self.alphaViewHeight.constant, offset.y)/self.multiAlphaViewTop
-				self.tableView.contentOffset.y = max(self.alphaViewHeight.constant, offset.y)
-				
-				self.headerView.layoutIfNeeded()
-				self.view.layoutIfNeeded()
-				}, completion: nil)
-		}
+			self.headerView.layoutIfNeeded()
+			self.view.layoutIfNeeded()
+			}, completion: nil)
 	}
 }
 
-extension DoubleScrollVC {
-    @IBAction func popVC(_ sender: AnyObject) {
-		_ = navigationController?.popViewController(animated: true)
+extension DoubleScrollVC: NormalTableViewCellDelegate {
+	func closeModal(_ ges: UITapGestureRecognizer) {
+		let point = ges.location(in: modalView)
+		guard !chooseView.frame.contains(point) else { return }
+		
+		modalView.removeFromSuperview()
+	}
+	
+	func initModalView() {
+		modalView = UIView(frame: UIScreen.main.bounds)
+		modalView.backgroundColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.3)
+		modalView.alpha = 0
+		
+		let tap = UITapGestureRecognizer(target: self, action: #selector(closeModal))
+		modalView.addGestureRecognizer(tap)
+	}
+	
+	func initChooseView(point: CGPoint, isHigher: Bool) {
+		
+		let y: CGFloat = isHigher ? (point.y - 10) : (point.y + 10)
+		
+		chooseView = UIView(frame: CGRect(origin: CGPoint(x: point.x, y: y), size: CGSize.zero))
+		chooseView.backgroundColor = UIColor.red
+		
+		initModalView()
+
+		modalView.addSubview(chooseView)
+		mainWindow.addSubview(modalView)
+	}
+	
+	func afterShowModalClick(cell: NormalTableViewCell, buttonFrame: CGRect) {
+		let buttonTopInWindow = mainWindow.convert(CGPoint(x: buttonFrame.midX, y: buttonFrame.minY), from: cell)
+		let buttonBottomInWindow = CGPoint(x: buttonTopInWindow.x, y: buttonTopInWindow.y+buttonFrame.height)
+		
+		let isHigher: Bool
+		let pointForChooseView: CGPoint
+		chooseViewHeight = 100
+		
+		if buttonTopInWindow.y < kScreenHeight / 2 {
+			isHigher = false
+			pointForChooseView = buttonBottomInWindow
+		} else {
+			isHigher = true
+			pointForChooseView = buttonTopInWindow
+		}
+		
+		initChooseView(point: pointForChooseView, isHigher: isHigher)
+
+		let y: CGFloat = isHigher ? (pointForChooseView.y - 10 - chooseViewHeight) : (pointForChooseView.y + 10)
+
+		UIView.animate(withDuration: 0.3, animations: {
+			self.modalView.alpha = 1
+			self.chooseView.frame = CGRect(x: 20, y: y, width: kScreenWidth-40, height: self.chooseViewHeight)
+		})
 	}
 }
 
 extension DoubleScrollVC: UITableViewDelegate, UITableViewDataSource {
 	func numberOfSections(in tableView: UITableView) -> Int {
-		return 4
+		return 1
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		switch section {
-		case 0, 2 :
-			return 1
-		case 1:
-			return 20
-		case 3:
-			return 3
-		default:
-			return 0
-		}
+		return 20
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		var cell: UITableViewCell!
-		switch indexPath.section {
+		switch indexPath.row {
 		case 0:
-			cell = tableView.dequeueReusableCell(withIdentifier: "topCell", for: indexPath)
+			let cell = tableView.dequeueReusableCell(withIdentifier: "topCell", for: indexPath)
+			return cell
 		default:
-			cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+			let cell = tableView.dequeueReusableCell(withIdentifier: NormalTableViewCell.getCellIdentify(), for: indexPath) as! NormalTableViewCell
+			cell.delegate = self
+			
+			cell.label.text = String(indexPath.row+1)
+			
+			return cell
 		}
-		
-		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -219,7 +277,7 @@ extension DoubleScrollVC: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		switch indexPath.section {
+		switch indexPath.row {
 		case 0:
 			return headerViewHeight.constant
 		default:

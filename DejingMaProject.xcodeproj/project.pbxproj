@@ -26,6 +26,7 @@
 		CF45CD3B1D9CD8B200369340 /* UIScrollView+PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD341D9CD8B200369340 /* UIScrollView+PullToRefresh.swift */; };
 		CF45CD3D1D9CE06D00369340 /* MyViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD3C1D9CE06D00369340 /* MyViewAnimator.swift */; };
 		CF45CD3F1D9CE23C00369340 /* MyRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD3E1D9CE23C00369340 /* MyRefreshView.swift */; };
+		CFE7E4051D9E209C001B4046 /* NormalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE7E4041D9E209C001B4046 /* NormalTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		CF45CD341D9CD8B200369340 /* UIScrollView+PullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+PullToRefresh.swift"; sourceTree = "<group>"; };
 		CF45CD3C1D9CE06D00369340 /* MyViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewAnimator.swift; sourceTree = "<group>"; };
 		CF45CD3E1D9CE23C00369340 /* MyRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRefreshView.swift; sourceTree = "<group>"; };
+		CFE7E4041D9E209C001B4046 /* NormalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 				CF31AAF71D9B5913002CF8E3 /* ChangeStatusVC.swift */,
 				CF31AAF91D9B6D4C002CF8E3 /* DoubleScrollVC.swift */,
 				7C0D98221D9C3A0A006C493D /* HitTestScrollView.swift */,
+				CFE7E4041D9E209C001B4046 /* NormalTableViewCell.swift */,
 				CF31AACD1D9B5395002CF8E3 /* Main.storyboard */,
 				CF31AAD01D9B5395002CF8E3 /* Assets.xcassets */,
 				CF31AAD21D9B5395002CF8E3 /* LaunchScreen.storyboard */,
@@ -319,6 +322,7 @@
 				CF31AAFA1D9B6D4C002CF8E3 /* DoubleScrollVC.swift in Sources */,
 				CF45CD381D9CD8B200369340 /* PullToRefresh.swift in Sources */,
 				CF45CD361D9CD8B200369340 /* DefaultViewAnimator.swift in Sources */,
+				CFE7E4051D9E209C001B4046 /* NormalTableViewCell.swift in Sources */,
 				CF31AAF81D9B5914002CF8E3 /* ChangeStatusVC.swift in Sources */,
 				CF45CD3F1D9CE23C00369340 /* MyRefreshView.swift in Sources */,
 				CF45CD3D1D9CE06D00369340 /* MyViewAnimator.swift in Sources */,

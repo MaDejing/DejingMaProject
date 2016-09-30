@@ -8,6 +8,10 @@
 
 import UIKit
 
+let kScreenWidth = UIScreen.main.bounds.width
+let kScreenHeight = UIScreen.main.bounds.height
+let mainWindow = UIApplication.shared.keyWindow!
+
 class secondObject: NSObject, NSCopying, NSMutableCopying {
 	var a: Int!
 	
@@ -25,9 +29,6 @@ class secondObject: NSObject, NSCopying, NSMutableCopying {
 		return obj
 	}
 }
-
-let kScreenWidth = UIScreen.main.bounds.width
-let kScreenHeight = UIScreen.main.bounds.height
 
 class ViewController: UIViewController {
 	
