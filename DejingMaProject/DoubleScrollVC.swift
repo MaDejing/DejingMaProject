@@ -120,6 +120,7 @@ extension DoubleScrollVC {
 }
 
 extension DoubleScrollVC {
+	
 	fileprivate func updateGestures() {
 		for ges in scrollViewA.gestureRecognizers! {
 			scrollViewA.removeGestureRecognizer(ges)
@@ -137,6 +138,7 @@ extension DoubleScrollVC {
 }
 
 extension DoubleScrollVC {
+	
     @IBAction func popVC(_ sender: AnyObject) {
 		_ = navigationController?.popViewController(animated: true)
 	}
@@ -191,6 +193,33 @@ extension DoubleScrollVC: UIScrollViewDelegate {
 }
 
 extension DoubleScrollVC: NormalTableViewCellDelegate {
+	
+	func afterShowModalClick(cell: NormalTableViewCell, buttonFrame: CGRect) {
+		let buttonTopInWindow = mainWindow.convert(CGPoint(x: buttonFrame.midX, y: buttonFrame.minY), from: cell)
+		let buttonBottomInWindow = CGPoint(x: buttonTopInWindow.x, y: buttonTopInWindow.y+buttonFrame.height)
+		
+		let isHigher: Bool
+		let pointForChooseView: CGPoint
+		chooseViewHeight = 100
+		
+		if buttonTopInWindow.y < kScreenHeight / 2 {
+			isHigher = false
+			pointForChooseView = buttonBottomInWindow
+		} else {
+			isHigher = true
+			pointForChooseView = buttonTopInWindow
+		}
+		
+		initChooseView(point: pointForChooseView, isHigher: isHigher)
+		
+		let y: CGFloat = isHigher ? (pointForChooseView.y - 10 - chooseViewHeight) : (pointForChooseView.y + 10)
+		
+		UIView.animate(withDuration: 0.3, animations: {
+			self.modalView.alpha = 1
+			self.chooseView.frame = CGRect(x: 20, y: y, width: kScreenWidth-40, height: self.chooseViewHeight)
+		})
+	}
+	
 	func closeModal(_ ges: UITapGestureRecognizer) {
 		let point = ges.location(in: modalView)
 		guard !chooseView.frame.contains(point) else { return }
@@ -219,32 +248,6 @@ extension DoubleScrollVC: NormalTableViewCellDelegate {
 		modalView.addSubview(chooseView)
 		mainWindow.addSubview(modalView)
 	}
-	
-	func afterShowModalClick(cell: NormalTableViewCell, buttonFrame: CGRect) {
-		let buttonTopInWindow = mainWindow.convert(CGPoint(x: buttonFrame.midX, y: buttonFrame.minY), from: cell)
-		let buttonBottomInWindow = CGPoint(x: buttonTopInWindow.x, y: buttonTopInWindow.y+buttonFrame.height)
-		
-		let isHigher: Bool
-		let pointForChooseView: CGPoint
-		chooseViewHeight = 100
-		
-		if buttonTopInWindow.y < kScreenHeight / 2 {
-			isHigher = false
-			pointForChooseView = buttonBottomInWindow
-		} else {
-			isHigher = true
-			pointForChooseView = buttonTopInWindow
-		}
-		
-		initChooseView(point: pointForChooseView, isHigher: isHigher)
-
-		let y: CGFloat = isHigher ? (pointForChooseView.y - 10 - chooseViewHeight) : (pointForChooseView.y + 10)
-
-		UIView.animate(withDuration: 0.3, animations: {
-			self.modalView.alpha = 1
-			self.chooseView.frame = CGRect(x: 20, y: y, width: kScreenWidth-40, height: self.chooseViewHeight)
-		})
-	}
 }
 
 extension DoubleScrollVC: UITableViewDelegate, UITableViewDataSource {
@@ -265,7 +268,7 @@ extension DoubleScrollVC: UITableViewDelegate, UITableViewDataSource {
 			let cell = tableView.dequeueReusableCell(withIdentifier: NormalTableViewCell.getCellIdentify(), for: indexPath) as! NormalTableViewCell
 			cell.delegate = self
 			
-			cell.label.text = String(indexPath.row+1)
+			cell.label.text = String(indexPath.row)
 			
 			return cell
 		}
