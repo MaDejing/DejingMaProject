@@ -18,6 +18,9 @@ class GCDViewController: UIViewController {
         // Do any additional setup after loading the view.
 		NSLog("start - %@", Thread.main)
 		
+		/// 总结:
+		/// 1. 同步线程在串行Queue中，并且同步block中的任务也在Queue中，那么就会造成死锁。
+		
 		/// 1. main queue 
 		// 它是由系统创建并全局可见的；它是一个serial queue；它的task都是在main thread运行的。
 		// 在main queue中，任务虽然会加到主线程中执行，但是如果主线程里也有任务就必须等主线程任务执行完才轮到主队列的，所以sync会死锁。
