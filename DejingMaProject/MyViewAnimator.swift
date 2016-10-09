@@ -21,7 +21,7 @@ class MyViewAnimator: RefreshViewAnimator {
 		case .initial: break
 //			refreshView.activityIndicator.stopAnimating()
 			
-		case .releasing(let progress): break
+		case .releasing(_): break
 //			refreshView.activityIndicator.isHidden = false
 //			
 //			var transform = CGAffineTransform.identity

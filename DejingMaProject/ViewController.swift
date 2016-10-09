@@ -69,6 +69,11 @@ class ViewController: UIViewController {
 		navigationController?.pushViewController(vc, animated: true)
 	}
 	
+	@IBAction func pushToGCD(_ sender: AnyObject) {
+		let vc = storyboard?.instantiateViewController(withIdentifier: "GCDViewController") as! GCDViewController
+		navigationController?.pushViewController(vc, animated: true)
+	}
+	
 	func panAction(_ ges: UIPanGestureRecognizer) {
 		//1.取到图片中点坐标
 		let centerPoint = firstView.center

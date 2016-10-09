@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vki-OZ-2zb">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -57,11 +56,19 @@
                                                     <action selector="pushToDoubleScroll:" destination="mKq-ti-3nx" eventType="touchUpInside" id="OWZ-pM-xOR"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWc-H4-pgc">
+                                                <state key="normal" title="GCD"/>
+                                                <connections>
+                                                    <action selector="pushToGCD:" destination="mKq-ti-3nx" eventType="touchUpInside" id="end-fu-5yV"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="fWc-H4-pgc" firstAttribute="leading" secondItem="sIx-OO-1Pa" secondAttribute="leading" id="ROh-7t-OLC"/>
                                             <constraint firstItem="ZxH-Zb-g0Y" firstAttribute="top" secondItem="sIx-OO-1Pa" secondAttribute="bottom" constant="8" id="Vko-tB-1RN"/>
                                             <constraint firstItem="sIx-OO-1Pa" firstAttribute="leading" secondItem="ZxH-Zb-g0Y" secondAttribute="leading" id="fpd-MH-wgG"/>
+                                            <constraint firstItem="fWc-H4-pgc" firstAttribute="top" secondItem="ZxH-Zb-g0Y" secondAttribute="bottom" constant="8" id="h4U-zz-Om8"/>
                                             <constraint firstItem="sIx-OO-1Pa" firstAttribute="top" secondItem="4cr-37-Iqb" secondAttribute="top" constant="50" id="noR-bK-8Km"/>
                                             <constraint firstItem="ZxH-Zb-g0Y" firstAttribute="leading" secondItem="4cr-37-Iqb" secondAttribute="leading" constant="28" id="wUY-o1-fuD"/>
                                         </constraints>
@@ -429,6 +436,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QdF-iB-OEa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="912.79999999999995" y="-116.49175412293854"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="hEI-2V-EmL">
+            <objects>
+                <viewController storyboardIdentifier="GCDViewController" id="UEZ-mD-Kfr" customClass="GCDViewController" customModule="DejingMaProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QgT-0g-uMx"/>
+                        <viewControllerLayoutGuide type="bottom" id="gvk-TA-zfh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MnE-w2-s7V">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KfY-8s-3Mc">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KfY-8s-3Mc" firstAttribute="centerX" secondItem="MnE-w2-s7V" secondAttribute="centerX" id="RiA-IU-nUG"/>
+                            <constraint firstItem="KfY-8s-3Mc" firstAttribute="top" secondItem="QgT-0g-uMx" secondAttribute="bottom" constant="50" id="SGN-AV-Ebb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="timeLabel" destination="KfY-8s-3Mc" id="q8o-px-kKN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H7Z-is-HZE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1580" y="-117"/>
         </scene>
     </scenes>
     <resources>
