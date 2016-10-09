@@ -38,13 +38,6 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		
-//		firstView = UIView.init(frame: CGRect(x: 20, y: 50, width: kScreenWidth-40, height: 100))
-//		firstView.backgroundColor = UIColor.black
-//		view.addSubview(firstView)
-//		
-//		let panGes = UIPanGestureRecognizer(target: self, action: #selector(panAction))
-//		firstView.addGestureRecognizer(panGes)
-//		firstView.isUserInteractionEnabled = true
 		let obj1 = secondObject(a: 1)
 		let obj2 = obj1.copy() as! secondObject
 		let obj3 = obj1.mutableCopy() as! secondObject
