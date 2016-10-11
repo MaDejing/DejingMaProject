@@ -8,8 +8,6 @@
 
 import UIKit
 
-let kScreenWidth = UIScreen.main.bounds.width
-let kScreenHeight = UIScreen.main.bounds.height
 let mainWindow = UIApplication.shared.keyWindow!
 
 class secondObject: NSObject, NSCopying, NSMutableCopying {
@@ -66,6 +64,14 @@ class ViewController: UIViewController {
 		let vc = storyboard?.instantiateViewController(withIdentifier: "GCDViewController") as! GCDViewController
 		navigationController?.pushViewController(vc, animated: true)
 	}
+	
+	@IBAction func pushToPhotoKit(_ sender: AnyObject) {
+		let vc = MyPhotoPickerVC()
+		let nav = UINavigationController(rootViewController: vc)
+		nav.navigationBar.isTranslucent = true
+		present(nav, animated: true, completion: nil)
+	}
+	
 	
 	func panAction(_ ges: UIPanGestureRecognizer) {
 		//1.取到图片中点坐标

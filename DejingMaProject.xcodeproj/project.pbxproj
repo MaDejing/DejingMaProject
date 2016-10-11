@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7C0D98231D9C3A0A006C493D /* HitTestScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0D98221D9C3A0A006C493D /* HitTestScrollView.swift */; };
 		CF31AACA1D9B5395002CF8E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AAC91D9B5395002CF8E3 /* AppDelegate.swift */; };
 		CF31AACC1D9B5395002CF8E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AACB1D9B5395002CF8E3 /* ViewController.swift */; };
 		CF31AACF1D9B5395002CF8E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF31AACD1D9B5395002CF8E3 /* Main.storyboard */; };
@@ -15,8 +14,6 @@
 		CF31AAD41D9B5395002CF8E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF31AAD21D9B5395002CF8E3 /* LaunchScreen.storyboard */; };
 		CF31AADF1D9B5396002CF8E3 /* DejingMaProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AADE1D9B5396002CF8E3 /* DejingMaProjectTests.swift */; };
 		CF31AAEA1D9B5396002CF8E3 /* DejingMaProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AAE91D9B5396002CF8E3 /* DejingMaProjectUITests.swift */; };
-		CF31AAF81D9B5914002CF8E3 /* ChangeStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AAF71D9B5913002CF8E3 /* ChangeStatusVC.swift */; };
-		CF31AAFA1D9B6D4C002CF8E3 /* DoubleScrollVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AAF91D9B6D4C002CF8E3 /* DoubleScrollVC.swift */; };
 		CF45CD351D9CD8B200369340 /* DefaultRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD2D1D9CD8B200369340 /* DefaultRefreshView.swift */; };
 		CF45CD361D9CD8B200369340 /* DefaultViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD2E1D9CD8B200369340 /* DefaultViewAnimator.swift */; };
 		CF45CD371D9CD8B200369340 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF45CD2F1D9CD8B200369340 /* Info.plist */; };
@@ -24,10 +21,24 @@
 		CF45CD391D9CD8B200369340 /* RefreshViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD321D9CD8B200369340 /* RefreshViewAnimator.swift */; };
 		CF45CD3A1D9CD8B200369340 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD331D9CD8B200369340 /* State.swift */; };
 		CF45CD3B1D9CD8B200369340 /* UIScrollView+PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD341D9CD8B200369340 /* UIScrollView+PullToRefresh.swift */; };
-		CF45CD3D1D9CE06D00369340 /* MyViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD3C1D9CE06D00369340 /* MyViewAnimator.swift */; };
-		CF45CD3F1D9CE23C00369340 /* MyRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF45CD3E1D9CE23C00369340 /* MyRefreshView.swift */; };
-		CFE7E4051D9E209C001B4046 /* NormalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE7E4041D9E209C001B4046 /* NormalTableViewCell.swift */; };
-		CFECF8541DA89B2400A4C67F /* GCDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFECF8531DA89B2400A4C67F /* GCDViewController.swift */; };
+		CF4C125B1DAC77D400180AFA /* ChangeStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C12521DAC77D400180AFA /* ChangeStatusVC.swift */; };
+		CF4C125D1DAC77D400180AFA /* GCDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C12561DAC77D400180AFA /* GCDViewController.swift */; };
+		CF4C12681DAC781600180AFA /* DoubleScrollVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C12631DAC781600180AFA /* DoubleScrollVC.swift */; };
+		CF4C12691DAC781600180AFA /* HitTestScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C12641DAC781600180AFA /* HitTestScrollView.swift */; };
+		CF4C126A1DAC781600180AFA /* MyRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C12651DAC781600180AFA /* MyRefreshView.swift */; };
+		CF4C126B1DAC781600180AFA /* MyViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C12661DAC781600180AFA /* MyViewAnimator.swift */; };
+		CF4C126C1DAC781600180AFA /* NormalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C12671DAC781600180AFA /* NormalTableViewCell.swift */; };
+		CF4C127C1DAC785800180AFA /* MyPhotoGridVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C126F1DAC785800180AFA /* MyPhotoGridVC.swift */; };
+		CF4C127D1DAC785800180AFA /* MyPhotoPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C12701DAC785800180AFA /* MyPhotoPickerVC.swift */; };
+		CF4C127E1DAC785800180AFA /* MyPhotoPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C12711DAC785800180AFA /* MyPhotoPreviewVC.swift */; };
+		CF4C12811DAC785800180AFA /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C12751DAC785800180AFA /* GlobalData.swift */; };
+		CF4C12821DAC785800180AFA /* MyPhotoImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C12761DAC785800180AFA /* MyPhotoImageManager.swift */; };
+		CF4C12831DAC785800180AFA /* MyPhotoSelectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C12771DAC785800180AFA /* MyPhotoSelectManager.swift */; };
+		CF4C12841DAC785800180AFA /* MyPhotoGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C12791DAC785800180AFA /* MyPhotoGridCell.swift */; };
+		CF4C12851DAC785800180AFA /* MyPhotoPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C127A1DAC785800180AFA /* MyPhotoPickerCell.swift */; };
+		CF4C12861DAC785800180AFA /* MyPhotoPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C127B1DAC785800180AFA /* MyPhotoPreviewCell.swift */; };
+		CF4C128A1DAC859D00180AFA /* GridCellButtonSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF4C12881DAC859D00180AFA /* GridCellButtonSelected@2x.png */; };
+		CF4C128B1DAC859D00180AFA /* GridCellButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF4C12891DAC859D00180AFA /* GridCellButton@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +59,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7C0D98221D9C3A0A006C493D /* HitTestScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitTestScrollView.swift; sourceTree = "<group>"; };
 		CF31AAC61D9B5395002CF8E3 /* DejingMaProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DejingMaProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF31AAC91D9B5395002CF8E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF31AACB1D9B5395002CF8E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -62,8 +72,6 @@
 		CF31AAE51D9B5396002CF8E3 /* DejingMaProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DejingMaProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF31AAE91D9B5396002CF8E3 /* DejingMaProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DejingMaProjectUITests.swift; sourceTree = "<group>"; };
 		CF31AAEB1D9B5396002CF8E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CF31AAF71D9B5913002CF8E3 /* ChangeStatusVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeStatusVC.swift; sourceTree = "<group>"; };
-		CF31AAF91D9B6D4C002CF8E3 /* DoubleScrollVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleScrollVC.swift; sourceTree = "<group>"; };
 		CF45CD2D1D9CD8B200369340 /* DefaultRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRefreshView.swift; sourceTree = "<group>"; };
 		CF45CD2E1D9CD8B200369340 /* DefaultViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewAnimator.swift; sourceTree = "<group>"; };
 		CF45CD2F1D9CD8B200369340 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -72,10 +80,24 @@
 		CF45CD321D9CD8B200369340 /* RefreshViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshViewAnimator.swift; sourceTree = "<group>"; };
 		CF45CD331D9CD8B200369340 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		CF45CD341D9CD8B200369340 /* UIScrollView+PullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+PullToRefresh.swift"; sourceTree = "<group>"; };
-		CF45CD3C1D9CE06D00369340 /* MyViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewAnimator.swift; sourceTree = "<group>"; };
-		CF45CD3E1D9CE23C00369340 /* MyRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRefreshView.swift; sourceTree = "<group>"; };
-		CFE7E4041D9E209C001B4046 /* NormalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalTableViewCell.swift; sourceTree = "<group>"; };
-		CFECF8531DA89B2400A4C67F /* GCDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDViewController.swift; sourceTree = "<group>"; };
+		CF4C12521DAC77D400180AFA /* ChangeStatusVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeStatusVC.swift; sourceTree = "<group>"; };
+		CF4C12561DAC77D400180AFA /* GCDViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDViewController.swift; sourceTree = "<group>"; };
+		CF4C12631DAC781600180AFA /* DoubleScrollVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleScrollVC.swift; sourceTree = "<group>"; };
+		CF4C12641DAC781600180AFA /* HitTestScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitTestScrollView.swift; sourceTree = "<group>"; };
+		CF4C12651DAC781600180AFA /* MyRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRefreshView.swift; sourceTree = "<group>"; };
+		CF4C12661DAC781600180AFA /* MyViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewAnimator.swift; sourceTree = "<group>"; };
+		CF4C12671DAC781600180AFA /* NormalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalTableViewCell.swift; sourceTree = "<group>"; };
+		CF4C126F1DAC785800180AFA /* MyPhotoGridVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotoGridVC.swift; sourceTree = "<group>"; };
+		CF4C12701DAC785800180AFA /* MyPhotoPickerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotoPickerVC.swift; sourceTree = "<group>"; };
+		CF4C12711DAC785800180AFA /* MyPhotoPreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotoPreviewVC.swift; sourceTree = "<group>"; };
+		CF4C12751DAC785800180AFA /* GlobalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
+		CF4C12761DAC785800180AFA /* MyPhotoImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotoImageManager.swift; sourceTree = "<group>"; };
+		CF4C12771DAC785800180AFA /* MyPhotoSelectManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotoSelectManager.swift; sourceTree = "<group>"; };
+		CF4C12791DAC785800180AFA /* MyPhotoGridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotoGridCell.swift; sourceTree = "<group>"; };
+		CF4C127A1DAC785800180AFA /* MyPhotoPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotoPickerCell.swift; sourceTree = "<group>"; };
+		CF4C127B1DAC785800180AFA /* MyPhotoPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotoPreviewCell.swift; sourceTree = "<group>"; };
+		CF4C12881DAC859D00180AFA /* GridCellButtonSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GridCellButtonSelected@2x.png"; sourceTree = "<group>"; };
+		CF4C12891DAC859D00180AFA /* GridCellButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GridCellButton@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,19 +149,16 @@
 		CF31AAC81D9B5395002CF8E3 /* DejingMaProject */ = {
 			isa = PBXGroup;
 			children = (
+				CF4C12511DAC77D400180AFA /* Project01 */,
+				CF4C12621DAC781600180AFA /* Project02 */,
+				CF4C12541DAC77D400180AFA /* Project03 */,
+				CF4C126D1DAC783400180AFA /* Project04 */,
 				CF31AAC91D9B5395002CF8E3 /* AppDelegate.swift */,
 				CF31AACB1D9B5395002CF8E3 /* ViewController.swift */,
-				CF31AAF71D9B5913002CF8E3 /* ChangeStatusVC.swift */,
-				CF31AAF91D9B6D4C002CF8E3 /* DoubleScrollVC.swift */,
-				7C0D98221D9C3A0A006C493D /* HitTestScrollView.swift */,
-				CFE7E4041D9E209C001B4046 /* NormalTableViewCell.swift */,
-				CF45CD3C1D9CE06D00369340 /* MyViewAnimator.swift */,
-				CFECF8531DA89B2400A4C67F /* GCDViewController.swift */,
 				CF31AACD1D9B5395002CF8E3 /* Main.storyboard */,
 				CF31AAD01D9B5395002CF8E3 /* Assets.xcassets */,
 				CF31AAD21D9B5395002CF8E3 /* LaunchScreen.storyboard */,
 				CF31AAD51D9B5395002CF8E3 /* Info.plist */,
-				CF45CD3E1D9CE23C00369340 /* MyRefreshView.swift */,
 			);
 			path = DejingMaProject;
 			sourceTree = "<group>";
@@ -175,6 +194,84 @@
 				CF45CD341D9CD8B200369340 /* UIScrollView+PullToRefresh.swift */,
 			);
 			path = PullToRefresh;
+			sourceTree = "<group>";
+		};
+		CF4C12511DAC77D400180AFA /* Project01 */ = {
+			isa = PBXGroup;
+			children = (
+				CF4C12521DAC77D400180AFA /* ChangeStatusVC.swift */,
+			);
+			path = Project01;
+			sourceTree = "<group>";
+		};
+		CF4C12541DAC77D400180AFA /* Project03 */ = {
+			isa = PBXGroup;
+			children = (
+				CF4C12561DAC77D400180AFA /* GCDViewController.swift */,
+			);
+			path = Project03;
+			sourceTree = "<group>";
+		};
+		CF4C12621DAC781600180AFA /* Project02 */ = {
+			isa = PBXGroup;
+			children = (
+				CF4C12631DAC781600180AFA /* DoubleScrollVC.swift */,
+				CF4C12671DAC781600180AFA /* NormalTableViewCell.swift */,
+				CF4C12641DAC781600180AFA /* HitTestScrollView.swift */,
+				CF4C12651DAC781600180AFA /* MyRefreshView.swift */,
+				CF4C12661DAC781600180AFA /* MyViewAnimator.swift */,
+			);
+			path = Project02;
+			sourceTree = "<group>";
+		};
+		CF4C126D1DAC783400180AFA /* Project04 */ = {
+			isa = PBXGroup;
+			children = (
+				CF4C12871DAC859D00180AFA /* Resources */,
+				CF4C126E1DAC785800180AFA /* Controller */,
+				CF4C12741DAC785800180AFA /* Model */,
+				CF4C12781DAC785800180AFA /* View */,
+			);
+			path = Project04;
+			sourceTree = "<group>";
+		};
+		CF4C126E1DAC785800180AFA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CF4C12701DAC785800180AFA /* MyPhotoPickerVC.swift */,
+				CF4C126F1DAC785800180AFA /* MyPhotoGridVC.swift */,
+				CF4C12711DAC785800180AFA /* MyPhotoPreviewVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CF4C12741DAC785800180AFA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CF4C12751DAC785800180AFA /* GlobalData.swift */,
+				CF4C12761DAC785800180AFA /* MyPhotoImageManager.swift */,
+				CF4C12771DAC785800180AFA /* MyPhotoSelectManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CF4C12781DAC785800180AFA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CF4C127A1DAC785800180AFA /* MyPhotoPickerCell.swift */,
+				CF4C12791DAC785800180AFA /* MyPhotoGridCell.swift */,
+				CF4C127B1DAC785800180AFA /* MyPhotoPreviewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CF4C12871DAC859D00180AFA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CF4C12881DAC859D00180AFA /* GridCellButtonSelected@2x.png */,
+				CF4C12891DAC859D00180AFA /* GridCellButton@2x.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +386,8 @@
 			files = (
 				CF45CD371D9CD8B200369340 /* Info.plist in Resources */,
 				CF31AAD41D9B5395002CF8E3 /* LaunchScreen.storyboard in Resources */,
+				CF4C128B1DAC859D00180AFA /* GridCellButton@2x.png in Resources */,
+				CF4C128A1DAC859D00180AFA /* GridCellButtonSelected@2x.png in Resources */,
 				CF31AAD11D9B5395002CF8E3 /* Assets.xcassets in Resources */,
 				CF31AACF1D9B5395002CF8E3 /* Main.storyboard in Resources */,
 			);
@@ -316,20 +415,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF45CD351D9CD8B200369340 /* DefaultRefreshView.swift in Sources */,
+				CF4C12681DAC781600180AFA /* DoubleScrollVC.swift in Sources */,
 				CF31AACC1D9B5395002CF8E3 /* ViewController.swift in Sources */,
+				CF4C126B1DAC781600180AFA /* MyViewAnimator.swift in Sources */,
 				CF45CD3B1D9CD8B200369340 /* UIScrollView+PullToRefresh.swift in Sources */,
+				CF4C12851DAC785800180AFA /* MyPhotoPickerCell.swift in Sources */,
+				CF4C12841DAC785800180AFA /* MyPhotoGridCell.swift in Sources */,
 				CF31AACA1D9B5395002CF8E3 /* AppDelegate.swift in Sources */,
+				CF4C12691DAC781600180AFA /* HitTestScrollView.swift in Sources */,
+				CF4C12821DAC785800180AFA /* MyPhotoImageManager.swift in Sources */,
 				CF45CD3A1D9CD8B200369340 /* State.swift in Sources */,
-				7C0D98231D9C3A0A006C493D /* HitTestScrollView.swift in Sources */,
+				CF4C125D1DAC77D400180AFA /* GCDViewController.swift in Sources */,
+				CF4C12831DAC785800180AFA /* MyPhotoSelectManager.swift in Sources */,
 				CF45CD391D9CD8B200369340 /* RefreshViewAnimator.swift in Sources */,
-				CF31AAFA1D9B6D4C002CF8E3 /* DoubleScrollVC.swift in Sources */,
+				CF4C127D1DAC785800180AFA /* MyPhotoPickerVC.swift in Sources */,
+				CF4C126C1DAC781600180AFA /* NormalTableViewCell.swift in Sources */,
 				CF45CD381D9CD8B200369340 /* PullToRefresh.swift in Sources */,
+				CF4C125B1DAC77D400180AFA /* ChangeStatusVC.swift in Sources */,
+				CF4C127E1DAC785800180AFA /* MyPhotoPreviewVC.swift in Sources */,
+				CF4C12861DAC785800180AFA /* MyPhotoPreviewCell.swift in Sources */,
+				CF4C127C1DAC785800180AFA /* MyPhotoGridVC.swift in Sources */,
+				CF4C12811DAC785800180AFA /* GlobalData.swift in Sources */,
+				CF4C126A1DAC781600180AFA /* MyRefreshView.swift in Sources */,
 				CF45CD361D9CD8B200369340 /* DefaultViewAnimator.swift in Sources */,
-				CFE7E4051D9E209C001B4046 /* NormalTableViewCell.swift in Sources */,
-				CFECF8541DA89B2400A4C67F /* GCDViewController.swift in Sources */,
-				CF31AAF81D9B5914002CF8E3 /* ChangeStatusVC.swift in Sources */,
-				CF45CD3F1D9CE23C00369340 /* MyRefreshView.swift in Sources */,
-				CF45CD3D1D9CE06D00369340 /* MyViewAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
