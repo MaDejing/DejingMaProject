@@ -72,6 +72,10 @@ class ViewController: UIViewController {
 		present(nav, animated: true, completion: nil)
 	}
 	
+	@IBAction func pushToCamera(_ sender: AnyObject) {
+		let vc = SysCameraViewController()
+		navigationController?.pushViewController(vc, animated: true)
+	}
 	
 	func panAction(_ ges: UIPanGestureRecognizer) {
 		//1.取到图片中点坐标

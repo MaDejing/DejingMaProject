@@ -68,11 +68,19 @@
                                                     <action selector="pushToPhotoKit:" destination="mKq-ti-3nx" eventType="touchUpInside" id="Ff4-fC-Bfh"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d7u-1g-8fJ">
+                                                <state key="normal" title="拍摄功能"/>
+                                                <connections>
+                                                    <action selector="pushToCamera:" destination="mKq-ti-3nx" eventType="touchUpInside" id="lQp-0H-Jlv"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="UfW-GF-UPg" firstAttribute="leading" secondItem="sIx-OO-1Pa" secondAttribute="leading" id="CWV-TS-Nh4"/>
+                                            <constraint firstItem="d7u-1g-8fJ" firstAttribute="leading" secondItem="sIx-OO-1Pa" secondAttribute="leading" id="KaT-hX-ifw"/>
                                             <constraint firstItem="fWc-H4-pgc" firstAttribute="leading" secondItem="sIx-OO-1Pa" secondAttribute="leading" id="ROh-7t-OLC"/>
+                                            <constraint firstItem="d7u-1g-8fJ" firstAttribute="top" secondItem="UfW-GF-UPg" secondAttribute="bottom" constant="8" id="TXf-ze-u7M"/>
                                             <constraint firstItem="ZxH-Zb-g0Y" firstAttribute="top" secondItem="sIx-OO-1Pa" secondAttribute="bottom" constant="8" id="Vko-tB-1RN"/>
                                             <constraint firstItem="UfW-GF-UPg" firstAttribute="top" secondItem="fWc-H4-pgc" secondAttribute="bottom" constant="8" id="bVb-vT-Yza"/>
                                             <constraint firstItem="sIx-OO-1Pa" firstAttribute="leading" secondItem="ZxH-Zb-g0Y" secondAttribute="leading" id="fpd-MH-wgG"/>
