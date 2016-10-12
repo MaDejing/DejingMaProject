@@ -10,11 +10,6 @@ import Foundation
 import UIKit
 import Photos
 
-// MARK: - MyPhotoPreviewVCDelegate
-protocol MyPhotoPreviewVCDelegate: NSObjectProtocol {
-	func afterChangeSelectedItem(_ vc: MyPhotoPreviewVC)
-}
-
 // MARK: - Class - 预览
 class MyPhotoPreviewVC: UIViewController {
 	
@@ -46,9 +41,7 @@ class MyPhotoPreviewVC: UIViewController {
 	var m_curIndex: Int!
 	/// 滑动后展示的照片index
 	var m_nextIndex: Int!
-	
-    weak var m_delegate: MyPhotoPreviewVCDelegate?
-	
+		
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -203,19 +196,46 @@ extension MyPhotoPreviewVC: UIScrollViewDelegate {
 			m_curIndex = Int((scrollView.contentOffset.x + m_minLineSpace) / pageWidth)
 		}
 	}
+    
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        let velocity = scrollView.panGestureRecognizer.velocity(in: self.view)
+        if velocity.x <= 0.0 {
+            m_nextIndex = m_curIndex + 1
+        } else {
+            m_nextIndex = m_curIndex - 1
+        }
+        
+        if (m_nextIndex < 0) {
+            m_nextIndex = 0
+        } else if (m_nextIndex >= m_collectionView.numberOfItems(inSection: 0)) {
+            m_nextIndex = m_collectionView.numberOfItems(inSection: 0) - 1
+        }
+        
+        m_collectionView.scrollToItem(at: IndexPath.init(item: m_nextIndex, section: 0), at: .left, animated: true)
+    }
 	
 	func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
 		
 		if scrollView == m_collectionView {
-			targetContentOffset.pointee = scrollView.contentOffset
-			
+//			targetContentOffset.pointee = scrollView.contentOffset
+//			
 			let pageWidth = scrollView.frame.width + m_minLineSpace
-			
-			if (velocity.x == 0) {
-				m_nextIndex = Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1)
-			} else {
-				m_nextIndex = velocity.x > 0 ? m_curIndex + 1 : m_curIndex - 1
-			}
+//
+//			if (velocity.x == 0) {
+//				m_nextIndex = Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1)
+//			} else {
+//				m_nextIndex = velocity.x > 0 ? m_curIndex + 1 : m_curIndex - 1
+//			}
+            
+            let contentOffsetX = scrollView.contentOffset.x
+            
+            let offset = contentOffsetX.truncatingRemainder(dividingBy: pageWidth)
+            if offset > kScreenWidth / 2.0 {
+                m_nextIndex = Int(contentOffsetX / pageWidth) + 1
+            }
+            else {
+                m_nextIndex = Int(contentOffsetX / pageWidth)
+            }
 			
 			if (m_nextIndex < 0) {
 				m_nextIndex = 0

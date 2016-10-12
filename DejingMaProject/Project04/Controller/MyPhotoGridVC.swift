@@ -70,10 +70,6 @@ class MyPhotoGridVC: UIViewController {
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
-		
-//		if (m_isPop) {
-//			MyPhotoSelectManager.defaultManager.clearData()
-//		}
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -215,7 +211,7 @@ extension MyPhotoGridVC {
 		vc.m_assets = assets
 		vc.m_allAssets = m_allAssets
 		vc.m_firstIndexPath = IndexPath.init(item: 0, section: 0)
-		vc.m_delegate = self
+//		vc.m_delegate = self
 		
 //		m_isPop = false
 		
@@ -228,22 +224,19 @@ extension MyPhotoGridVC {
 }
 
 // MARK: - MyPhotoGridCellDelegate, MyPhotoPreviewVCDelegate
-extension MyPhotoGridVC: MyPhotoGridCellDelegate, MyPhotoPreviewVCDelegate {
+extension MyPhotoGridVC: MyPhotoGridCellDelegate {
 	func myPhotoGridCellButtonSelect(cell: MyPhotoGridCell) {
 		
 		let selectedItem = MySelectedItem.init(asset: cell.m_data.m_asset, index: cell.m_data.m_index)
 		MyPhotoSelectManager.defaultManager.updateSelectItems(vcToShowAlert: self, button: cell.m_selectButton, selectedItem: selectedItem)
 		
 		updateToolBarView()
-		m_collectionView.reloadItems(at: MyPhotoSelectManager.defaultManager.m_selectedIndex)
+        
+        for indexPath in MyPhotoSelectManager.defaultManager.m_selectedIndex {
+            let cell = m_collectionView.cellForItem(at: indexPath) as! MyPhotoGridCell
+            cell.updateCellBadge()
+        }
 	}
-	
-	func afterChangeSelectedItem(_ vc: MyPhotoPreviewVC) {
-		
-        m_collectionView.reloadData()
-		updateToolBarView()
-//		m_isPop = true
-    }
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
@@ -274,9 +267,6 @@ extension MyPhotoGridVC: UICollectionViewDelegate, UICollectionViewDataSource {
 		vc.m_assets = m_allAssets
 		vc.m_allAssets = m_allAssets
 		vc.m_firstIndexPath = indexPath
-		vc.m_delegate = self
-		
-//		m_isPop = false
 		
 		navigationController?.pushViewController(vc, animated: true)
 	}

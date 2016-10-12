@@ -92,11 +92,15 @@ class MyPhotoGridCell: UICollectionViewCell {
 		
 		m_imageView.image = data.m_img
 		
-		if MyPhotoSelectManager.defaultManager.m_selectedIndex.contains(m_data.m_index) {
-			let sIndex: Int = MyPhotoSelectManager.defaultManager.m_selectedIndex.index(of: m_data.m_index)!
-			m_selectButton.setTitle(String(sIndex+1), for: .selected)
-		}
-	}
+        updateCellBadge()
+    }
+    
+    func updateCellBadge() {
+        if MyPhotoSelectManager.defaultManager.m_selectedIndex.contains(m_data.m_index) {
+            let sIndex: Int = MyPhotoSelectManager.defaultManager.m_selectedIndex.index(of: m_data.m_index)!
+            m_selectButton.setTitle(String(sIndex+1), for: .selected)
+        }
+    }
 	
 	func photoSelect() {
 		m_delegate!.myPhotoGridCellButtonSelect(cell: self)
