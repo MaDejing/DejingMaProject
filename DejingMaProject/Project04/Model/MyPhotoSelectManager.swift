@@ -37,7 +37,7 @@ class MyPhotoSelectManager: NSObject {
 	/// - parameter vcToShowAlert: 展示提示框的VC
 	/// - parameter button:        选择按钮
 	/// - parameter selectedItem:  被选择的资源
-	func updateSelectItems(vcToShowAlert: UIViewController, button: UIButton, selectedItem: MySelectedItem) {
+	func updateSelectItems(vcToShowAlert: UIViewController, button: UIButton, selectedItem: MySelectedItem, keepOrigin: Bool = false, sIndex: Int? = nil) {
 		if self.m_selectedItems.count >= maxCount && !button.isSelected {
 			let alert = UIAlertController(title: nil, message: "最多可选择\(maxCount)张照片", preferredStyle: .alert)
 			let cancelAction = UIAlertAction(title: "确定", style: .cancel, handler: nil)
@@ -47,9 +47,13 @@ class MyPhotoSelectManager: NSObject {
 			vcToShowAlert.present(alert, animated: true, completion: nil)
 		} else {
 			button.isSelected = !button.isSelected
-						
+			
 			if button.isSelected {
-				self.m_selectedItems.append(selectedItem)
+				if keepOrigin && sIndex != nil {
+					m_selectedItems.insert(selectedItem, at: sIndex!)
+				} else {
+					self.m_selectedItems.append(selectedItem)
+				}
 			} else {
 				let index = self.m_selectedIndex.index(of: selectedItem.m_index)
 				
@@ -72,6 +76,14 @@ class MyPhotoSelectManager: NSObject {
 		for asset in self.m_selectedItems {
 			self.m_selectedIndex.append(asset.m_index)
 		}
+	}
+	
+	func contains(item indexPath: IndexPath) -> Bool {
+		return m_selectedIndex.contains(indexPath)
+	}
+	
+	func index(of indexPath: IndexPath) -> Int? {
+		return m_selectedIndex.index(of: indexPath)
 	}
 	
 	/// 清空已选数据

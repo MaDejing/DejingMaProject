@@ -50,9 +50,6 @@ class MyPhotoGridVC: UIViewController {
 	/// 加载图片相关
 	fileprivate lazy var m_imageManager = PHCachingImageManager()
 	fileprivate var m_assetGridThumbnailSize: CGSize!
-
-	/// 页面消失是pop出去还是进入预览
-//	fileprivate var m_isPop = true
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -211,9 +208,6 @@ extension MyPhotoGridVC {
 		vc.m_assets = assets
 		vc.m_allAssets = m_allAssets
 		vc.m_firstIndexPath = IndexPath.init(item: 0, section: 0)
-//		vc.m_delegate = self
-		
-//		m_isPop = false
 		
 		navigationController?.pushViewController(vc, animated: true)
 	}

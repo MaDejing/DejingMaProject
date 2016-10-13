@@ -39,7 +39,7 @@ class MyPhotoGridCell: UICollectionViewCell {
 		m_selectButton.setTitle("", for: .normal)
 		
 		m_selectButton.setImage(UIImage(), for: .selected)
-		m_selectButton.setTitleColor(UIColor.black, for: .selected)
+		m_selectButton.setTitleColor(UIColor.red, for: .selected)
 		
 		m_selectButton.titleLabel?.font = UIFont.getFont(name: "PingFang-SC-Regular", size: 15)
 		m_selectButton.contentEdgeInsets = UIEdgeInsetsMake(0, 22, 22, 0)

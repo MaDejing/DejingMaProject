@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 let mainWindow = UIApplication.shared.keyWindow!
 
@@ -66,10 +67,26 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func pushToPhotoKit(_ sender: AnyObject) {
-		let vc = MyPhotoPickerVC()
-		let nav = UINavigationController(rootViewController: vc)
-		nav.navigationBar.isTranslucent = true
-		present(nav, animated: true, completion: nil)
+		let photoLibrayStatus: PHAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
+		
+		switch photoLibrayStatus {
+		case .notDetermined:
+			break
+			
+		case .denied, .restricted:
+			let alert = UIAlertController(title: nil, message: "请您设置允许APP访问您的照片\n设置>隐私>照片", preferredStyle: .alert)
+			let cancelAction = UIAlertAction(title: "确定", style: .cancel, handler: nil)
+			
+			alert.addAction(cancelAction)
+			
+			present(alert, animated: true, completion: nil)
+			
+		case .authorized:
+			let vc = MyPhotoPickerVC()
+			let nav = UINavigationController(rootViewController: vc)
+			nav.navigationBar.isTranslucent = true
+			present(nav, animated: true, completion: nil)
+		}
 	}
 	
 	@IBAction func pushToCamera(_ sender: AnyObject) {

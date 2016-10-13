@@ -41,11 +41,14 @@ class MyPhotoPreviewVC: UIViewController {
 	var m_curIndex: Int!
 	/// 滑动后展示的照片index
 	var m_nextIndex: Int!
-		
+	var sIndex: Int?
+	var curSelectIndex: Int?
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		self.automaticallyAdjustsScrollViewInsets = false
+		initData()
         initSubViews()
     }
 	
@@ -71,9 +74,16 @@ class MyPhotoPreviewVC: UIViewController {
 
 // MARK: - Initial & Update Funtions
 extension MyPhotoPreviewVC {
-    
-    func initSubViews() {
+	
+	func initData() {
+		m_curIndex = m_firstIndexPath.item
+		m_nextIndex = m_firstIndexPath.item
 		
+		let asset = m_assets[m_firstIndexPath.item]
+		m_curIndexPath = IndexPath.init(item: m_allAssets.index(of: asset)!, section: 0)
+	}
+	
+    func initSubViews() {
         initWithCollectionView()
 		initWithTopView()
 		initWithButtomView()
@@ -111,15 +121,16 @@ extension MyPhotoPreviewVC {
 		backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
 		
 		m_selectedCountView = UIView(frame: CGRect(x: kScreenWidth-12.5-23, y: 42-23/2.0, width: 23, height: 23))
-		m_selectedCountView.backgroundColor = UIColor.orange
-		
 		m_selectButton = UIButton(frame: CGRect(x: 0, y: 0, width: 23, height: 23))
+		
 		m_selectButton.addTarget(self, action: #selector(selectClick), for: .touchUpInside)
 		m_selectButton.setImage(UIImage(named: "GridCellButton"), for: .normal)
 		m_selectButton.setTitle("", for: .normal)
 		m_selectButton.setImage(UIImage(), for: .selected)
-		m_selectButton.setTitleColor(UIColor.black, for: .selected)
+		m_selectButton.setTitleColor(UIColor.white, for: .selected)
 		m_selectButton.titleLabel?.font = UIFont.getFont(name: "PingFang-SC-Regular", size: 15)
+
+		updateTopView()
 		
 		m_selectedCountView.addSubview(m_selectButton)
 		m_topView.addSubview(backButton)
@@ -143,6 +154,18 @@ extension MyPhotoPreviewVC {
 		view.addSubview(m_bottomView)
 		
 		updateBottomView()
+	}
+	
+	func updateTopView() {
+		m_selectButton.isSelected = MyPhotoSelectManager.defaultManager.contains(item: m_curIndexPath)
+
+		if m_selectButton.isSelected {
+			let sIndex: Int = MyPhotoSelectManager.defaultManager.m_selectedIndex.index(of: m_curIndexPath)!
+			m_selectButton.setTitle(String(sIndex+1), for: .selected)
+			m_selectedCountView.backgroundColor = UIColor.orange
+		} else {
+			m_selectedCountView.backgroundColor = UIColor.clear
+		}
 	}
 	
     func updateBottomView() {
@@ -171,14 +194,27 @@ extension MyPhotoPreviewVC {
 	
 	func selectClick() {
 		let selectedItem = MySelectedItem.init(asset: m_allAssets[m_curIndexPath.item], index: m_curIndexPath)
-		MyPhotoSelectManager.defaultManager.updateSelectItems(vcToShowAlert: self, button: m_selectButton, selectedItem: selectedItem)
-		updateBottomView()
-		if MyPhotoSelectManager.defaultManager.m_selectedIndex.contains(m_curIndexPath) {
-			let sIndex: Int = MyPhotoSelectManager.defaultManager.m_selectedIndex.index(of: m_curIndexPath)!
-			m_selectButton.setTitle(String(sIndex+1), for: .selected)
-			m_selectedCountView.backgroundColor = UIColor.orange
-		} else {
+
+		if m_selectButton.isSelected {
+			sIndex = MyPhotoSelectManager.defaultManager.index(of: m_curIndexPath)
+			curSelectIndex = m_curIndexPath.item
+
+			MyPhotoSelectManager.defaultManager.updateSelectItems(vcToShowAlert: self, button: m_selectButton, selectedItem: selectedItem)
+			updateBottomView()
+
 			m_selectedCountView.backgroundColor = UIColor.clear
+			
+		} else {
+			
+			if sIndex != nil && curSelectIndex != nil {
+				MyPhotoSelectManager.defaultManager.updateSelectItems(vcToShowAlert: self, button: m_selectButton, selectedItem: selectedItem, keepOrigin: true, sIndex: sIndex)
+			} else {
+				MyPhotoSelectManager.defaultManager.updateSelectItems(vcToShowAlert: self, button: m_selectButton, selectedItem: selectedItem)
+			}
+			
+			updateBottomView()
+			
+			updateTopView()
 		}
 	}
 	
@@ -191,60 +227,65 @@ extension MyPhotoPreviewVC {
 // MARK: - UIScrollViewDelegate
 extension MyPhotoPreviewVC: UIScrollViewDelegate {
 	func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-		if scrollView == m_collectionView {
-			let pageWidth = scrollView.frame.width + m_minLineSpace
-			m_curIndex = Int((scrollView.contentOffset.x + m_minLineSpace) / pageWidth)
-		}
+		guard scrollView == m_collectionView else { return }
+
+		let pageWidth = scrollView.frame.width + m_minLineSpace
+		m_curIndex = Int((scrollView.contentOffset.x + m_minLineSpace) / pageWidth)
 	}
-    
-    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        let velocity = scrollView.panGestureRecognizer.velocity(in: self.view)
-        if velocity.x <= 0.0 {
-            m_nextIndex = m_curIndex + 1
-        } else {
-            m_nextIndex = m_curIndex - 1
-        }
-        
-        if (m_nextIndex < 0) {
-            m_nextIndex = 0
-        } else if (m_nextIndex >= m_collectionView.numberOfItems(inSection: 0)) {
-            m_nextIndex = m_collectionView.numberOfItems(inSection: 0) - 1
-        }
-        
-        m_collectionView.scrollToItem(at: IndexPath.init(item: m_nextIndex, section: 0), at: .left, animated: true)
-    }
+	
+//    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+//		guard scrollView == m_collectionView else { return }
+//
+//        let velocity = scrollView.panGestureRecognizer.velocity(in: self.view)
+//        if velocity.x <= 0.0 {
+//            m_nextIndex = m_curIndex + 1
+//        } else {
+//            m_nextIndex = m_curIndex - 1
+//        }
+//        
+//        if (m_nextIndex < 0) {
+//            m_nextIndex = 0
+//        } else if (m_nextIndex >= m_collectionView.numberOfItems(inSection: 0)) {
+//            m_nextIndex = m_collectionView.numberOfItems(inSection: 0) - 1
+//        }
+//		
+//        m_collectionView.scrollToItem(at: IndexPath.init(item: m_nextIndex, section: 0), at: .left, animated: true)
+//    }
 	
 	func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-		
-		if scrollView == m_collectionView {
-//			targetContentOffset.pointee = scrollView.contentOffset
-//			
-			let pageWidth = scrollView.frame.width + m_minLineSpace
-//
-//			if (velocity.x == 0) {
-//				m_nextIndex = Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1)
-//			} else {
-//				m_nextIndex = velocity.x > 0 ? m_curIndex + 1 : m_curIndex - 1
-//			}
-            
-            let contentOffsetX = scrollView.contentOffset.x
-            
-            let offset = contentOffsetX.truncatingRemainder(dividingBy: pageWidth)
-            if offset > kScreenWidth / 2.0 {
-                m_nextIndex = Int(contentOffsetX / pageWidth) + 1
-            }
-            else {
-                m_nextIndex = Int(contentOffsetX / pageWidth)
-            }
-			
-			if (m_nextIndex < 0) {
-				m_nextIndex = 0
-			} else if (m_nextIndex >= m_collectionView.numberOfItems(inSection: 0)) {
-				m_nextIndex = m_collectionView.numberOfItems(inSection: 0) - 1
-			}
-			
-			m_collectionView.scrollToItem(at: IndexPath.init(item: m_nextIndex, section: 0), at: .left, animated: true)
+		guard scrollView == m_collectionView else { return }
+
+		targetContentOffset.pointee = scrollView.contentOffset
+
+		let pageWidth = scrollView.frame.width + m_minLineSpace
+
+		if (velocity.x == 0) {
+			m_nextIndex = Int(floor((scrollView.contentOffset.x - kScreenWidth / 2) / pageWidth) + 1)
+		} else {
+			m_nextIndex = velocity.x > 0 ? m_curIndex + 1 : m_curIndex - 1
 		}
+		
+		if (m_nextIndex < 0) {
+			m_nextIndex = 0
+		} else if (m_nextIndex >= m_collectionView.numberOfItems(inSection: 0)) {
+			m_nextIndex = m_collectionView.numberOfItems(inSection: 0) - 1
+		}
+		
+		m_collectionView.scrollToItem(at: IndexPath.init(item: m_nextIndex, section: 0), at: .left, animated: true)
+	}
+	
+	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		guard scrollView == m_collectionView else { return }
+		
+		let asset = m_assets[m_nextIndex]
+		m_curIndexPath = IndexPath.init(item: m_allAssets.index(of: asset)!, section: 0)
+
+		if m_nextIndex != curSelectIndex {
+			curSelectIndex = nil
+			sIndex = nil
+		}
+		
+		updateTopView()
 	}
 }
 
@@ -270,15 +311,7 @@ extension MyPhotoPreviewVC: UICollectionViewDelegate, UICollectionViewDataSource
         
 		let asset = m_assets[indexPath.item]
         
-        m_curIndexPath = IndexPath.init(item: m_allAssets.index(of: asset)!, section: 0)
-		m_selectButton.isSelected = MyPhotoSelectManager.defaultManager.m_selectedIndex.contains(m_curIndexPath)
-		if m_selectButton.isSelected {
-			let sIndex: Int = MyPhotoSelectManager.defaultManager.m_selectedIndex.index(of: m_curIndexPath)!
-			m_selectButton.setTitle(String(sIndex+1), for: .selected)
-			m_selectedCountView.backgroundColor = UIColor.orange
-		} else {
-			m_selectedCountView.backgroundColor = UIColor.clear
-		}
+//        m_curIndexPath = IndexPath.init(item: m_allAssets.index(of: asset)!, section: 0)
 		
 		cell.updateData(asset, size: calImageSize(asset, scale: 2.0), indexPath: indexPath)
 
