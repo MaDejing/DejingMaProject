@@ -226,11 +226,12 @@ extension MyPhotoGridVC: MyPhotoGridCellDelegate {
 		
 		updateToolBarView()
         
-//        for indexPath in MyPhotoSelectManager.defaultManager.m_selectedIndex {
-//            let cell = m_collectionView.cellForItem(at: indexPath) as! MyPhotoGridCell
-//            cell.updateCellBadge()
-//        }
-		m_collectionView.reloadItems(at: MyPhotoSelectManager.defaultManager.m_selectedIndex)
+        for indexPath in MyPhotoSelectManager.defaultManager.m_selectedIndex {
+            if let cell = m_collectionView.cellForItem(at: indexPath) as? MyPhotoGridCell {
+                cell.updateCellBadge()
+            }
+        }
+//		m_collectionView.reloadItems(at: MyPhotoSelectManager.defaultManager.m_selectedIndex)
 	}
 }
 
