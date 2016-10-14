@@ -68,10 +68,6 @@ class MyPhotoSelectManager: NSObject {
 	
 	/// 更新已选项index数组
 	func updateIndexArr() {
-//		self.m_selectedItems.sort { (item1, item2) -> Bool in
-//			return item1.m_index.item < item2.m_index.item
-//		}
-		
 		self.m_selectedIndex.removeAll()
 		for asset in self.m_selectedItems {
 			self.m_selectedIndex.append(asset.m_index)

@@ -21,26 +21,21 @@ class MyPhotoPreviewVC: UIViewController {
     var m_bottomView: UIView!
 	
     /// UICollectionview 视图相关
-    let m_minLineSpace: CGFloat = 10.0
+    let m_minLineSpace: CGFloat = 0.0
     let m_minItemSpace: CGFloat = 0.0
-    let m_collectionTop: CGFloat = 0.0
-    let m_collectionLeft: CGFloat = 0.0
-    let m_collectionBottom: CGFloat = 0.0
-    let m_collectionRight: CGFloat = 0.0
+	let m_pageWidth: CGFloat = kScreenWidth + 10
 	
 	/// 需要上级传递的参数
 	/// 需要展示的照片
 	var m_assets: [PHAsset]! = []
 	/// 所有的照片
     var m_allAssets: [PHAsset]! = []
-	/// 首张展示的照片index
-	var m_firstIndexPath: IndexPath! = IndexPath.init(item: 0, section: 0)
-	/// 当前展示的照片index
+	/// 首张展示的照片indexPath
+	var m_firstIndexPath: IndexPath!
+	/// 当前展示的照片在全部照片中的indexPath
     var m_curIndexPath: IndexPath!
-	/// 滑动前展示的照片index
+	/// 当前展示的照片index
 	var m_curIndex: Int!
-	/// 滑动后展示的照片index
-	var m_nextIndex: Int!
 	var sIndex: Int?
 	var curSelectIndex: Int?
 	
@@ -55,8 +50,7 @@ class MyPhotoPreviewVC: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
         
-        m_collectionView.layoutIfNeeded()
-        m_collectionView.scrollToItem(at: IndexPath.init(item: m_firstIndexPath.item, section: 0), at: .left, animated: false)
+		m_collectionView.setContentOffset(CGPoint(x: m_pageWidth*CGFloat(m_firstIndexPath.item), y: 0), animated: false)
 		
 		navigationController?.setNavigationBarHidden(true, animated: false)
 	}
@@ -77,7 +71,6 @@ extension MyPhotoPreviewVC {
 	
 	func initData() {
 		m_curIndex = m_firstIndexPath.item
-		m_nextIndex = m_firstIndexPath.item
 		
 		let asset = m_assets[m_firstIndexPath.item]
 		m_curIndexPath = IndexPath.init(item: m_allAssets.index(of: asset)!, section: 0)
@@ -92,20 +85,23 @@ extension MyPhotoPreviewVC {
     
     func initWithCollectionView() {
 		let collectionViewFlowLayout = UICollectionViewFlowLayout()
-		m_collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: collectionViewFlowLayout)
+		m_collectionView = UICollectionView(frame: CGRect(x: -((m_pageWidth - kScreenWidth)*0.5), y: 0, width: m_pageWidth, height: kScreenHeight), collectionViewLayout: collectionViewFlowLayout)
 		m_collectionView.showsHorizontalScrollIndicator = false
+		m_collectionView.isPagingEnabled = true
 		
         m_collectionView.backgroundColor = UIColor.black
 		
 		m_collectionView.delegate = self
 		m_collectionView.dataSource = self
 		
+		m_collectionView.contentOffset = CGPoint.zero
+		m_collectionView.contentSize = CGSize(width: CGFloat(m_assets.count)*m_pageWidth, height: kScreenHeight)
+		
         m_collectionView.register(MyPhotoPreviewCell.self, forCellWithReuseIdentifier: MyPhotoPreviewCell.getCellIdentifier())
 		
 		collectionViewFlowLayout.minimumLineSpacing = m_minLineSpace
 		collectionViewFlowLayout.minimumInteritemSpacing = m_minItemSpace
-		collectionViewFlowLayout.sectionInset = UIEdgeInsetsMake(m_collectionTop, m_collectionLeft, m_collectionBottom, m_collectionRight)
-		collectionViewFlowLayout.itemSize = m_collectionView.frame.size
+		collectionViewFlowLayout.itemSize = CGSize(width: kScreenWidth + 10, height: kScreenHeight)
 		collectionViewFlowLayout.scrollDirection = .horizontal
 	
 		view.addSubview(m_collectionView)
@@ -157,10 +153,11 @@ extension MyPhotoPreviewVC {
 	}
 	
 	func updateTopView() {
-		m_selectButton.isSelected = MyPhotoSelectManager.defaultManager.contains(item: m_curIndexPath)
+		let indexPath = IndexPath(item: m_curIndex, section: 0)
+		m_selectButton.isSelected = MyPhotoSelectManager.defaultManager.contains(item: indexPath)
 
 		if m_selectButton.isSelected {
-			let sIndex: Int = MyPhotoSelectManager.defaultManager.m_selectedIndex.index(of: m_curIndexPath)!
+			let sIndex: Int = MyPhotoSelectManager.defaultManager.m_selectedIndex.index(of: indexPath)!
 			m_selectButton.setTitle(String(sIndex+1), for: .selected)
 			m_selectedCountView.backgroundColor = UIColor.orange
 		} else {
@@ -193,10 +190,11 @@ extension MyPhotoPreviewVC {
 	}
 	
 	func selectClick() {
-		let selectedItem = MySelectedItem.init(asset: m_allAssets[m_curIndexPath.item], index: m_curIndexPath)
+		let indexPath = IndexPath(item: m_curIndex, section: 0)
+		let selectedItem = MySelectedItem.init(asset: m_allAssets[m_curIndex], index: indexPath)
 
 		if m_selectButton.isSelected {
-			sIndex = MyPhotoSelectManager.defaultManager.index(of: m_curIndexPath)
+			sIndex = MyPhotoSelectManager.defaultManager.index(of: indexPath)
 			curSelectIndex = m_curIndexPath.item
 
 			MyPhotoSelectManager.defaultManager.updateSelectItems(vcToShowAlert: self, button: m_selectButton, selectedItem: selectedItem)
@@ -226,61 +224,72 @@ extension MyPhotoPreviewVC {
 
 // MARK: - UIScrollViewDelegate
 extension MyPhotoPreviewVC: UIScrollViewDelegate {
-	func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+	
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		guard scrollView == m_collectionView else { return }
-
-		let pageWidth = scrollView.frame.width + m_minLineSpace
-		m_curIndex = Int((scrollView.contentOffset.x + m_minLineSpace) / pageWidth)
+		
+		var offSetX = scrollView.contentOffset.x
+		offSetX += m_pageWidth * 0.5
+		
+		let currentIndex = Int(offSetX / m_pageWidth)
+		
+		if (m_curIndex != currentIndex) {
+			m_curIndex = currentIndex
+			
+			updateTopView()
+		}
 	}
 	
-//    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+//	func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
 //		guard scrollView == m_collectionView else { return }
 //
-//        let velocity = scrollView.panGestureRecognizer.velocity(in: self.view)
-//        if velocity.x <= 0.0 {
-//            m_nextIndex = m_curIndex + 1
-//        } else {
-//            m_nextIndex = m_curIndex - 1
-//        }
-//        
-//        if (m_nextIndex < 0) {
-//            m_nextIndex = 0
-//        } else if (m_nextIndex >= m_collectionView.numberOfItems(inSection: 0)) {
-//            m_nextIndex = m_collectionView.numberOfItems(inSection: 0) - 1
-//        }
+//		let pageWidth = scrollView.frame.width + m_minLineSpace
+//		m_curIndex = Int((scrollView.contentOffset.x + m_minLineSpace) / pageWidth)
+//	}
+//
+//	func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//		guard scrollView == m_collectionView else { return }
+//
+//		targetContentOffset.pointee = scrollView.contentOffset
+//
+//		let pageWidth = scrollView.frame.width + m_minLineSpace
+//
+//		if (velocity.x == 0) {
+//			m_nextIndex = Int(floor((scrollView.contentOffset.x - kScreenWidth/2) / pageWidth) + 1)
+//		} else {
+//			if velocity.x > 0 {
+//				if scrollView.contentOffset.x < pageWidth * CGFloat(m_curIndex) {
+//					m_nextIndex = m_curIndex
+//				} else {
+//					m_nextIndex = m_curIndex + 1
+//				}
+//			} else {
+//				if scrollView.contentOffset.x > pageWidth * CGFloat(m_curIndex) {
+//					m_nextIndex = m_curIndex
+//				} else {
+//					m_nextIndex = m_curIndex - 1
+//				}
+//			}
+//		}
 //		
-//        m_collectionView.scrollToItem(at: IndexPath.init(item: m_nextIndex, section: 0), at: .left, animated: true)
-//    }
-	
-	func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-		guard scrollView == m_collectionView else { return }
-
-		targetContentOffset.pointee = scrollView.contentOffset
-
-		let pageWidth = scrollView.frame.width + m_minLineSpace
-
-		if (velocity.x == 0) {
-			m_nextIndex = Int(floor((scrollView.contentOffset.x - kScreenWidth / 2) / pageWidth) + 1)
-		} else {
-			m_nextIndex = velocity.x > 0 ? m_curIndex + 1 : m_curIndex - 1
-		}
-		
-		if (m_nextIndex < 0) {
-			m_nextIndex = 0
-		} else if (m_nextIndex >= m_collectionView.numberOfItems(inSection: 0)) {
-			m_nextIndex = m_collectionView.numberOfItems(inSection: 0) - 1
-		}
-		
-		m_collectionView.scrollToItem(at: IndexPath.init(item: m_nextIndex, section: 0), at: .left, animated: true)
-	}
-	
+//		if (m_nextIndex < 0) {
+//			m_nextIndex = 0
+//		} else if (m_nextIndex >= m_collectionView.numberOfItems(inSection: 0)) {
+//			m_nextIndex = m_collectionView.numberOfItems(inSection: 0) - 1
+//		}
+//		
+//		print(scrollView.contentOffset, velocity, m_curIndex, m_nextIndex)
+//		
+//		m_collectionView.scrollToItem(at: IndexPath.init(item: m_nextIndex, section: 0), at: .left, animated: true)
+//	}
+//	
 	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
 		guard scrollView == m_collectionView else { return }
 		
-		let asset = m_assets[m_nextIndex]
+		let asset = m_assets[m_curIndex]
 		m_curIndexPath = IndexPath.init(item: m_allAssets.index(of: asset)!, section: 0)
 
-		if m_nextIndex != curSelectIndex {
+		if m_curIndex != curSelectIndex {
 			curSelectIndex = nil
 			sIndex = nil
 		}
@@ -310,8 +319,6 @@ extension MyPhotoPreviewVC: UICollectionViewDelegate, UICollectionViewDataSource
 		cell.m_delegate = self
         
 		let asset = m_assets[indexPath.item]
-        
-//        m_curIndexPath = IndexPath.init(item: m_allAssets.index(of: asset)!, section: 0)
 		
 		cell.updateData(asset, size: calImageSize(asset, scale: 2.0), indexPath: indexPath)
 
