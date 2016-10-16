@@ -26,7 +26,7 @@ class MyPhotoImageManager: NSObject {
 	/// - parameter completion: 完成后调用的block
 	///
 	/// - returns: 请求ID
-	func getPhotoWithAsset(_ asset: PHAsset, size: CGSize, options: PHImageRequestOptions, completion: @escaping ((UIImage, [AnyHashable: Any], Bool) -> Void)) -> PHImageRequestID {
+	func getPhotoWithAsset(_ asset: PHAsset, size: CGSize, options: PHImageRequestOptions?, completion: @escaping ((UIImage, [AnyHashable: Any], Bool) -> Void)) -> PHImageRequestID {
 
 		let imageRequest = PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: options) { (img, info) in
 			
@@ -38,6 +38,17 @@ class MyPhotoImageManager: NSObject {
 		
 		return imageRequest
 	}
+    
+    func getPhotoData(for asset: PHAsset, options: PHImageRequestOptions?, resultHandler: @escaping (Data?, String?, UIImageOrientation, [AnyHashable : Any]?) -> Swift.Void) -> PHImageRequestID {
+        let requestID = PHImageManager.default().requestImageData(for: asset, options: options, resultHandler: { (d, string, orientaton, info) in
+            
+            guard let data = d else { return }
+            
+            resultHandler(data, string, orientaton, info)
+        })
+        
+        return requestID
+    }
 	
 	/// 获取照片资源的标识符
 	///

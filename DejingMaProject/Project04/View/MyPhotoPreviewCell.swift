@@ -14,30 +14,20 @@ protocol MyPhotoPreviewCellDelegate: NSObjectProtocol {
 }
 
 class MyPhotoPreviewCell: UICollectionViewCell {
-	
-	let m_pageWidth: CGFloat = kScreenWidth + 10.0
-	
-    lazy var m_actIndicator: UIActivityIndicatorView = {
-        var tempAct = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-        
-        tempAct.center = self.center
-        tempAct.hidesWhenStopped = true
-        tempAct.startAnimating()
-        
-        return tempAct
-    }()
+		
+//    lazy var m_actIndicator: UIActivityIndicatorView = {
+//        var tempAct = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+//        
+//        tempAct.center = self.center
+//        tempAct.hidesWhenStopped = true
+//        tempAct.startAnimating()
+//        
+//        return tempAct
+//    }()
+//    
+	fileprivate var m_scrollView: UIScrollView!
+	fileprivate var m_imageView: UIImageView!
     
-	var m_scrollView: UIScrollView!
-	fileprivate lazy var m_imageView: UIImageView = {
-		var tempImgView = UIImageView()
-		
-		tempImgView.contentMode = .scaleAspectFit
-		tempImgView.clipsToBounds = true
-		tempImgView.isUserInteractionEnabled = true
-		
-		return tempImgView
-	}()
-	
 	fileprivate var m_data: MyPhotoItem!
 	
 	weak var m_delegate: MyPhotoPreviewCellDelegate?
@@ -55,7 +45,7 @@ class MyPhotoPreviewCell: UICollectionViewCell {
 		
 		singleTap.require(toFail: doubleTap)
 		
-		m_scrollView = UIScrollView(frame: CGRect(x: (m_pageWidth-kScreenWidth)*0.5, y: 0, width: kScreenWidth, height: kScreenHeight))
+		m_scrollView = UIScrollView(frame: UIScreen.main.bounds)
 		
 		m_scrollView.delegate = self
 		m_scrollView.backgroundColor = UIColor.black
@@ -66,11 +56,16 @@ class MyPhotoPreviewCell: UICollectionViewCell {
 
 		m_scrollView.addGestureRecognizer(singleTap)
 		m_scrollView.addGestureRecognizer(doubleTap)
+        
+        m_imageView = UIImageView()
+        m_imageView.contentMode = .scaleAspectFit
+        m_imageView.clipsToBounds = true
+        m_imageView.isUserInteractionEnabled = true
 		
 		self.addSubview(m_scrollView)
 		m_scrollView.addSubview(m_imageView)
 		
-        self.addSubview(m_actIndicator)
+//        self.addSubview(m_actIndicator)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -85,17 +80,17 @@ class MyPhotoPreviewCell: UICollectionViewCell {
 		
 		let option = PHImageRequestOptions()
 		option.resizeMode = .fast
-		option.progressHandler = {
-			[weak self] progress, _, _, _ in
-			
-			guard let weakSelf = self else { return }
-			
-			DispatchQueue.main.async {
-				weakSelf.m_scrollView.isHidden = true
-				weakSelf.m_actIndicator.startAnimating()
-				weakSelf.bringSubview(toFront: weakSelf.m_actIndicator)
-			}
-		}
+//		option.progressHandler = {
+//			[weak self] progress, _, _, _ in
+//			
+//			guard let weakSelf = self else { return }
+//			
+//			DispatchQueue.main.async {
+//				weakSelf.m_scrollView.isHidden = true
+//				weakSelf.m_actIndicator.startAnimating()
+//				weakSelf.bringSubview(toFront: weakSelf.m_actIndicator)
+//			}
+//		}
 		
 		let _ = MyPhotoImageManager.defaultManager.getPhotoWithAsset(asset, size: size, options: option) {
 			[weak self] (image, _, _) in
@@ -116,8 +111,8 @@ class MyPhotoPreviewCell: UICollectionViewCell {
         imageResize()
         
         m_scrollView.isHidden = false
-        m_actIndicator.stopAnimating()
-        bringSubview(toFront: m_scrollView)
+//        m_actIndicator.stopAnimating()
+//        bringSubview(toFront: m_scrollView)
     }
 }
 

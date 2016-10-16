@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vki-OZ-2zb">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vki-OZ-2zb">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -74,19 +74,35 @@
                                                     <action selector="pushToCamera:" destination="mKq-ti-3nx" eventType="touchUpInside" id="lQp-0H-Jlv"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3i9-ZW-chj">
+                                                <state key="normal" title="PageEnableTest"/>
+                                                <connections>
+                                                    <action selector="pushToPageEnable:" destination="mKq-ti-3nx" eventType="touchUpInside" id="D79-qe-grJ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76O-Bi-PNa">
+                                                <state key="normal" title="底部栏"/>
+                                                <connections>
+                                                    <action selector="pushToBottomTool:" destination="mKq-ti-3nx" eventType="touchUpInside" id="evr-uh-71I"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="76O-Bi-PNa" firstAttribute="leading" secondItem="sIx-OO-1Pa" secondAttribute="leading" id="73r-Us-asB"/>
                                             <constraint firstItem="UfW-GF-UPg" firstAttribute="leading" secondItem="sIx-OO-1Pa" secondAttribute="leading" id="CWV-TS-Nh4"/>
                                             <constraint firstItem="d7u-1g-8fJ" firstAttribute="leading" secondItem="sIx-OO-1Pa" secondAttribute="leading" id="KaT-hX-ifw"/>
+                                            <constraint firstItem="3i9-ZW-chj" firstAttribute="leading" secondItem="sIx-OO-1Pa" secondAttribute="leading" id="Pti-Ad-EG2"/>
                                             <constraint firstItem="fWc-H4-pgc" firstAttribute="leading" secondItem="sIx-OO-1Pa" secondAttribute="leading" id="ROh-7t-OLC"/>
                                             <constraint firstItem="d7u-1g-8fJ" firstAttribute="top" secondItem="UfW-GF-UPg" secondAttribute="bottom" constant="8" id="TXf-ze-u7M"/>
                                             <constraint firstItem="ZxH-Zb-g0Y" firstAttribute="top" secondItem="sIx-OO-1Pa" secondAttribute="bottom" constant="8" id="Vko-tB-1RN"/>
                                             <constraint firstItem="UfW-GF-UPg" firstAttribute="top" secondItem="fWc-H4-pgc" secondAttribute="bottom" constant="8" id="bVb-vT-Yza"/>
                                             <constraint firstItem="sIx-OO-1Pa" firstAttribute="leading" secondItem="ZxH-Zb-g0Y" secondAttribute="leading" id="fpd-MH-wgG"/>
                                             <constraint firstItem="fWc-H4-pgc" firstAttribute="top" secondItem="ZxH-Zb-g0Y" secondAttribute="bottom" constant="8" id="h4U-zz-Om8"/>
+                                            <constraint firstItem="76O-Bi-PNa" firstAttribute="top" secondItem="3i9-ZW-chj" secondAttribute="bottom" constant="8" id="kq0-zP-v8z"/>
                                             <constraint firstItem="sIx-OO-1Pa" firstAttribute="top" secondItem="4cr-37-Iqb" secondAttribute="top" constant="50" id="noR-bK-8Km"/>
                                             <constraint firstItem="ZxH-Zb-g0Y" firstAttribute="leading" secondItem="4cr-37-Iqb" secondAttribute="leading" constant="28" id="wUY-o1-fuD"/>
+                                            <constraint firstItem="3i9-ZW-chj" firstAttribute="top" secondItem="d7u-1g-8fJ" secondAttribute="bottom" constant="8" id="zOB-CZ-r6R"/>
                                         </constraints>
                                     </view>
                                 </subviews>

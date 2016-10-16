@@ -85,7 +85,7 @@ extension MyPhotoPreviewVC {
     
     func initWithCollectionView() {
 		let collectionViewFlowLayout = UICollectionViewFlowLayout()
-		m_collectionView = UICollectionView(frame: CGRect(x: -((m_pageWidth - kScreenWidth)*0.5), y: 0, width: m_pageWidth, height: kScreenHeight), collectionViewLayout: collectionViewFlowLayout)
+		m_collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: m_pageWidth, height: kScreenHeight), collectionViewLayout: collectionViewFlowLayout)
 		m_collectionView.showsHorizontalScrollIndicator = false
 		m_collectionView.isPagingEnabled = true
 		

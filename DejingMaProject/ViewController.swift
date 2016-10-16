@@ -93,6 +93,16 @@ class ViewController: UIViewController {
 		let vc = SysCameraViewController()
 		navigationController?.pushViewController(vc, animated: true)
 	}
+    
+    @IBAction func pushToPageEnable(_ sender: AnyObject) {
+        let vc = PageEnableScrollViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func pushToBottomTool(_ sender: AnyObject) {
+        let vc  = BottomToolViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 	
 	func panAction(_ ges: UIPanGestureRecognizer) {
 		//1.取到图片中点坐标

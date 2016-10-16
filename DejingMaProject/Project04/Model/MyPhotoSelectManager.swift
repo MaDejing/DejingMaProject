@@ -28,6 +28,7 @@ class MyPhotoSelectManager: NSObject {
 	
 	var m_selectedItems: [MySelectedItem] = []
 	var m_selectedIndex: [IndexPath] = []
+    var m_sendItems: [UIImage] = []
 	
 	/// static是延时加载的，并且是常量，加载一次后不会加载第二次，所以实现了单例。
 	static let defaultManager: MyPhotoSelectManager = MyPhotoSelectManager()
@@ -92,7 +93,21 @@ class MyPhotoSelectManager: NSObject {
 	///
 	/// - parameter vcToDismiss: 需要dismiss的VC
 	func doSend(vcToDismiss: UIViewController) {
-		print(MyPhotoSelectManager.defaultManager.m_selectedItems)
+//		print(MyPhotoSelectManager.defaultManager.m_selectedItems)
+        
+        m_sendItems.removeAll()
+        for item in MyPhotoSelectManager.defaultManager.m_selectedItems {
+            let asset = item.m_asset
+            
+            _ = MyPhotoImageManager.defaultManager.getPhotoWithAsset(asset!, size: PHImageManagerMaximumSize, options: nil, completion: { (image, _, _) in
+                
+                self.m_sendItems.append(image)
+                
+                print(image)
+            })
+        }
+        
+        
 		vcToDismiss.dismiss(animated: true, completion: nil)
 		MyPhotoSelectManager.defaultManager.clearData()
 	}
