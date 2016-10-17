@@ -53,8 +53,7 @@ class MyPhotoPickerVC: UIViewController {
 		
 		MyPhotoSelectManager.defaultManager.clearData()
 
-		let photoLibrayStatus: PHAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
-		if (m_firstLoad && photoLibrayStatus == .authorized) {
+		if (m_firstLoad) {
 			pushToAlbumDetail(0, animated: false)
 			
 			m_firstLoad = false
