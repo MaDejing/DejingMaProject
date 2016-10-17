@@ -16,7 +16,8 @@ protocol MyPhotoGridCellDelegate: NSObjectProtocol {
 
 class MyPhotoGridCell: UICollectionViewCell {
 	var m_imageView: UIImageView!
-	var m_selectButton: UIButton!
+//	var m_selectButton: YLButton!
+	var m_selectedCountView: MyPhotoSelectCountView!
 	
 	weak var m_delegate: MyPhotoGridCellDelegate?
 	
@@ -31,21 +32,16 @@ class MyPhotoGridCell: UICollectionViewCell {
 
 		m_imageView = UIImageView(frame: self.bounds)
 		
-		m_selectButton = UIButton(type: .custom)
-		m_selectButton.frame = CGRect(x: self.bounds.width-45, y: 0, width: 45, height: 45)
-		m_selectButton.addTarget(self, action: #selector(photoSelect), for: .touchUpInside)
+		let selectViewWidth: CGFloat = 23.0
+		let delta: CGFloat = 2.0
+		let selectViewFrame = CGRect(x: self.bounds.width-45, y: 0, width: 45, height: 45)
+		let bgViewFrame = CGRect(x: 45-selectViewWidth-delta, y: delta, width: selectViewWidth, height: selectViewWidth)
 		
-		m_selectButton.setImage(UIImage(named: "GridCellButton"), for: .normal)
-		m_selectButton.setTitle("", for: .normal)
-		
-		m_selectButton.setImage(UIImage(), for: .selected)
-		m_selectButton.setTitleColor(UIColor.red, for: .selected)
-		
-		m_selectButton.titleLabel?.font = UIFont.getFont(name: "PingFang-SC-Regular", size: 15)
-		m_selectButton.contentEdgeInsets = UIEdgeInsetsMake(0, 22, 22, 0)
+		m_selectedCountView = MyPhotoSelectCountView(frame: selectViewFrame, bgViewFrame: bgViewFrame)
+		m_selectedCountView.m_selectButton.addTarget(self, action: #selector(photoSelect), for: .touchUpInside)
 		
 		addSubview(m_imageView)
-		addSubview(m_selectButton)
+		addSubview(m_selectedCountView)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -98,8 +94,10 @@ class MyPhotoGridCell: UICollectionViewCell {
     func updateCellBadge() {
         if MyPhotoSelectManager.defaultManager.m_selectedIndex.contains(m_data.m_index) {
             let sIndex: Int = MyPhotoSelectManager.defaultManager.m_selectedIndex.index(of: m_data.m_index)!
-            m_selectButton.setTitle(String(sIndex+1), for: .selected)
-        }
+			m_selectedCountView.updateSubViews(selected: true, title: String(sIndex+1))
+		} else {
+			m_selectedCountView.updateSubViews(selected: false, title: "")
+		}
     }
 	
 	func photoSelect() {

@@ -14,10 +14,10 @@ import Photos
 class MyPhotoPreviewVC: UIViewController {
 	
 	var m_topView: UIView!
-	var m_selectedCountView: UIView!
-	var m_selectButton: UIButton!
+	var m_selectedCountView: MyPhotoSelectCountView!
+//	var m_selectButton: UIButton!
 	var m_collectionView: UICollectionView!
-    var m_done: UIButton!
+    var m_done: MySelectPhotoDoneButton!
     var m_bottomView: UIView!
 	
     /// UICollectionview 视图相关
@@ -89,7 +89,7 @@ extension MyPhotoPreviewVC {
 		m_collectionView.showsHorizontalScrollIndicator = false
 		m_collectionView.isPagingEnabled = true
 		
-        m_collectionView.backgroundColor = UIColor.black
+        m_collectionView.backgroundColor = UIColor.color(RGBHEX: 0x232329, alpha: 1.0)
 		
 		m_collectionView.delegate = self
 		m_collectionView.dataSource = self
@@ -109,26 +109,23 @@ extension MyPhotoPreviewVC {
 	
 	fileprivate func initWithTopView() {
 		m_topView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 64))
-		m_topView.backgroundColor = UIColor.black
+		m_topView.backgroundColor = UIColor.color(RGBHEX: 0x151518, alpha: 0.8)
 		
-		let backButton = UIButton(frame: CGRect(x: 12, y: 35, width: 50, height: 17.5))
-		backButton.setTitle("back", for: .normal)
-		backButton.setTitleColor(UIColor.white, for: .normal)
+		let backButton = YLButton(frame: CGRect(x: 0, y: 0, width: 33, height: 33))
+		backButton.center.y = 32
+		backButton.setImage(UIImage(named: "image01"), for: .normal)
+		backButton.imageViewFrame = CGRect(x: 12.5, y: 15.5*0.5, width: 8, height: 17.5)
 		backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
 		
-		m_selectedCountView = UIView(frame: CGRect(x: kScreenWidth-12.5-23, y: 42-23/2.0, width: 23, height: 23))
-		m_selectButton = UIButton(frame: CGRect(x: 0, y: 0, width: 23, height: 23))
+		let selectViewWidth: CGFloat = 23.0
+		let selectViewFrame = CGRect(x: kScreenWidth-1.5-45, y: 9.5, width: 45, height: 45)
+		let bgViewFrame = CGRect(x: 11, y: 11, width: selectViewWidth, height: selectViewWidth)
 		
-		m_selectButton.addTarget(self, action: #selector(selectClick), for: .touchUpInside)
-		m_selectButton.setImage(UIImage(named: "GridCellButton"), for: .normal)
-		m_selectButton.setTitle("", for: .normal)
-		m_selectButton.setImage(UIImage(), for: .selected)
-		m_selectButton.setTitleColor(UIColor.white, for: .selected)
-		m_selectButton.titleLabel?.font = UIFont.getFont(name: "PingFang-SC-Regular", size: 15)
+		m_selectedCountView = MyPhotoSelectCountView(frame: selectViewFrame, bgViewFrame: bgViewFrame)
+		m_selectedCountView.m_selectButton.addTarget(self, action: #selector(selectClick), for: .touchUpInside)
 
 		updateTopView()
 		
-		m_selectedCountView.addSubview(m_selectButton)
 		m_topView.addSubview(backButton)
 		m_topView.addSubview(m_selectedCountView)
 		view.addSubview(m_topView)
@@ -136,14 +133,10 @@ extension MyPhotoPreviewVC {
 	
 	fileprivate func initWithButtomView() {
 		m_bottomView = UIView(frame: CGRect(x: 0, y: kScreenHeight-44, width: kScreenWidth, height: 44))
-		m_bottomView.backgroundColor = UIColor.black
+		m_bottomView.backgroundColor = UIColor.color(RGBHEX: 0x151518, alpha: 0.8)
 		
-		m_done = UIButton(type: .custom)
-		m_done.frame = CGRect(x: kScreenWidth-17-46, y: 12, width: 46, height: 20)
-		m_done.setTitle("完成", for: .normal)
-		m_done.titleLabel?.font = UIFont(name: "PingFang-SC-Regular", size: 14)
-		m_done.setTitleColor(UIColor.white, for: .normal)
-		m_done.setTitleColor(UIColor.lightGray, for: .disabled)
+		m_done = MySelectPhotoDoneButton(frame: CGRect(x: kScreenWidth-63, y: 0, width: 63, height: 30))
+		m_done.center.y = 22
 		m_done.addTarget(self, action: #selector(doneClick), for: .touchUpInside)
 		
 		m_bottomView.addSubview(m_done)
@@ -154,19 +147,24 @@ extension MyPhotoPreviewVC {
 	
 	func updateTopView() {
 		let indexPath = IndexPath(item: m_curIndex, section: 0)
-		m_selectButton.isSelected = MyPhotoSelectManager.defaultManager.contains(item: indexPath)
+		m_selectedCountView.m_selectButton.isSelected = MyPhotoSelectManager.defaultManager.contains(item: indexPath)
 
-		if m_selectButton.isSelected {
+		if m_selectedCountView.m_selectButton.isSelected {
 			let sIndex: Int = MyPhotoSelectManager.defaultManager.m_selectedIndex.index(of: indexPath)!
-			m_selectButton.setTitle(String(sIndex+1), for: .selected)
-			m_selectedCountView.backgroundColor = UIColor.orange
+			m_selectedCountView.updateSubViews(selected: true, title: String(sIndex+1))
+			
+//			m_selectButton.setTitle(String(sIndex+1), for: .selected)
+//			m_selectedCountView.backgroundColor = UIColor.color(RGBHEX: 0xffdd00, alpha: 1.0)
 		} else {
-			m_selectedCountView.backgroundColor = UIColor.clear
+			m_selectedCountView.updateSubViews(selected: false, title: "")
+//			m_selectedCountView.backgroundColor = UIColor.clear
 		}
 	}
 	
     func updateBottomView() {
-        m_done.isEnabled = MyPhotoSelectManager.defaultManager.m_selectedItems.count > 0
+		m_done.isEnabled = MyPhotoSelectManager.defaultManager.m_selectedItems.count > 0
+
+        m_done.updateView()
     }
 }
 
@@ -193,21 +191,21 @@ extension MyPhotoPreviewVC {
 		let indexPath = IndexPath(item: m_curIndex, section: 0)
 		let selectedItem = MySelectedItem.init(asset: m_allAssets[m_curIndex], index: indexPath)
 
-		if m_selectButton.isSelected {
+		let button: YLButton = m_selectedCountView.m_selectButton
+		
+		if button.isSelected {
 			sIndex = MyPhotoSelectManager.defaultManager.index(of: indexPath)
 			curSelectIndex = m_curIndexPath.item
 
-			MyPhotoSelectManager.defaultManager.updateSelectItems(vcToShowAlert: self, button: m_selectButton, selectedItem: selectedItem)
+			MyPhotoSelectManager.defaultManager.updateSelectItems(vcToShowAlert: self, button: button, selectedItem: selectedItem)
 			updateBottomView()
-
-			m_selectedCountView.backgroundColor = UIColor.clear
-			
+			updateTopView()			
 		} else {
 			
 			if sIndex != nil && curSelectIndex != nil {
-				MyPhotoSelectManager.defaultManager.updateSelectItems(vcToShowAlert: self, button: m_selectButton, selectedItem: selectedItem, keepOrigin: true, sIndex: sIndex)
+				MyPhotoSelectManager.defaultManager.updateSelectItems(vcToShowAlert: self, button: button, selectedItem: selectedItem, keepOrigin: true, sIndex: sIndex)
 			} else {
-				MyPhotoSelectManager.defaultManager.updateSelectItems(vcToShowAlert: self, button: m_selectButton, selectedItem: selectedItem)
+				MyPhotoSelectManager.defaultManager.updateSelectItems(vcToShowAlert: self, button: button, selectedItem: selectedItem)
 			}
 			
 			updateBottomView()
@@ -239,50 +237,7 @@ extension MyPhotoPreviewVC: UIScrollViewDelegate {
 			updateTopView()
 		}
 	}
-	
-//	func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//		guard scrollView == m_collectionView else { return }
-//
-//		let pageWidth = scrollView.frame.width + m_minLineSpace
-//		m_curIndex = Int((scrollView.contentOffset.x + m_minLineSpace) / pageWidth)
-//	}
-//
-//	func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//		guard scrollView == m_collectionView else { return }
-//
-//		targetContentOffset.pointee = scrollView.contentOffset
-//
-//		let pageWidth = scrollView.frame.width + m_minLineSpace
-//
-//		if (velocity.x == 0) {
-//			m_nextIndex = Int(floor((scrollView.contentOffset.x - kScreenWidth/2) / pageWidth) + 1)
-//		} else {
-//			if velocity.x > 0 {
-//				if scrollView.contentOffset.x < pageWidth * CGFloat(m_curIndex) {
-//					m_nextIndex = m_curIndex
-//				} else {
-//					m_nextIndex = m_curIndex + 1
-//				}
-//			} else {
-//				if scrollView.contentOffset.x > pageWidth * CGFloat(m_curIndex) {
-//					m_nextIndex = m_curIndex
-//				} else {
-//					m_nextIndex = m_curIndex - 1
-//				}
-//			}
-//		}
-//		
-//		if (m_nextIndex < 0) {
-//			m_nextIndex = 0
-//		} else if (m_nextIndex >= m_collectionView.numberOfItems(inSection: 0)) {
-//			m_nextIndex = m_collectionView.numberOfItems(inSection: 0) - 1
-//		}
-//		
-//		print(scrollView.contentOffset, velocity, m_curIndex, m_nextIndex)
-//		
-//		m_collectionView.scrollToItem(at: IndexPath.init(item: m_nextIndex, section: 0), at: .left, animated: true)
-//	}
-//	
+
 	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
 		guard scrollView == m_collectionView else { return }
 		

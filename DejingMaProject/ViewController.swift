@@ -69,19 +69,14 @@ class ViewController: UIViewController {
 	@IBAction func pushToPhotoKit(_ sender: AnyObject) {
 		let photoLibrayStatus: PHAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
 		
-		switch photoLibrayStatus {
-		case .notDetermined:
-			break
-			
-		case .denied, .restricted:
+		if photoLibrayStatus == .denied || photoLibrayStatus == .restricted {
 			let alert = UIAlertController(title: nil, message: "请您设置允许APP访问您的照片\n设置>隐私>照片", preferredStyle: .alert)
 			let cancelAction = UIAlertAction(title: "确定", style: .cancel, handler: nil)
 			
 			alert.addAction(cancelAction)
 			
 			present(alert, animated: true, completion: nil)
-			
-		case .authorized:
+		} else {
 			let vc = MyPhotoPickerVC()
 			let nav = UINavigationController(rootViewController: vc)
 			nav.navigationBar.isTranslucent = true

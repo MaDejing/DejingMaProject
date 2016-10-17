@@ -42,9 +42,14 @@ class MyPhotoPickerVC: UIViewController {
 		
 		title = "照片库"
 		
-		initData()
+		let photoLibrayStatus: PHAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
+//		if photoLibrayStatus == .authorized {
 		
-		initSubViews()
+			initData()
+			
+			initSubViews()
+//		}
+
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +57,8 @@ class MyPhotoPickerVC: UIViewController {
 		
 		MyPhotoSelectManager.defaultManager.clearData()
 
-		if (m_firstLoad) {
+		let photoLibrayStatus: PHAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
+		if (m_firstLoad && photoLibrayStatus == .authorized) {
 			pushToAlbumDetail(0, animated: false)
 			
 			m_firstLoad = false

@@ -48,7 +48,7 @@ class MyPhotoPreviewCell: UICollectionViewCell {
 		m_scrollView = UIScrollView(frame: UIScreen.main.bounds)
 		
 		m_scrollView.delegate = self
-		m_scrollView.backgroundColor = UIColor.black
+		m_scrollView.backgroundColor = UIColor.color(RGBHEX: 0x232329, alpha: 1.0)
 		m_scrollView.maximumZoomScale = 2
 		m_scrollView.minimumZoomScale = 1
 		m_scrollView.showsVerticalScrollIndicator = false

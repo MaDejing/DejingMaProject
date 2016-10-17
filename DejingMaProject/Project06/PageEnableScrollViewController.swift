@@ -32,7 +32,7 @@ class PageEnableScrollViewController: UIViewController {
         scrollView.addSubview(view1)
         
         let view2 = UIView(frame: CGRect(x: 500, y: 0, width: 400, height: scrollView.frame.height))
-        scrollView.backgroundColor = UIColor.orange
+        scrollView.backgroundColor = UIColor.color(RGBHEX: 0xffdd00, alpha: 1.0)
         scrollView.addSubview(view2)
     }
 

@@ -29,17 +29,17 @@ class MyPhotoGridVC: UIViewController {
 	/// StoryBoard相关
 	fileprivate var m_collectionView: UICollectionView!
 	fileprivate var m_bottomView: UIView!
-	fileprivate var m_preview: UIButton!
-	fileprivate var m_done: UIButton!
+	fileprivate var m_preview: YLButton!
+	fileprivate var m_done: MySelectPhotoDoneButton!
 	
 	/// Collectionview 视图相关
 	fileprivate var m_itemWidth: CGFloat = 0.0
-	fileprivate let m_minLineSpace: CGFloat = 5.0
-	fileprivate let m_minItemSpace: CGFloat = 5.0
-	fileprivate let m_collectionTop: CGFloat = 0
-	fileprivate let m_collectionLeft: CGFloat = 5
-	fileprivate let m_collectionBottom: CGFloat = 0
-	fileprivate let m_collectionRight: CGFloat = 5
+	fileprivate let m_minLineSpace: CGFloat = 4.0
+	fileprivate let m_minItemSpace: CGFloat = 4.0
+	fileprivate let m_collectionTop: CGFloat = 2
+	fileprivate let m_collectionLeft: CGFloat = 2
+	fileprivate let m_collectionBottom: CGFloat = 2
+	fileprivate let m_collectionRight: CGFloat = 2
 	
 	/// 数据相关
 	var m_fetchResult: PHFetchResult<PHAsset>!
@@ -129,19 +129,18 @@ extension MyPhotoGridVC {
 		m_bottomView = UIView(frame: CGRect(x: 0, y: kScreenHeight-44, width: kScreenWidth, height: 44))
 		m_bottomView.backgroundColor = UIColor.black
 		
-		m_preview = UIButton(type: .custom)
-		m_preview.frame = CGRect(x: 17, y: 12, width: 40, height: 20)
-		m_preview.setTitle("预览", for: .normal)
+		m_preview = YLButton(frame: CGRect(x: 17, y: 0, width: 46, height: 30))
+		m_preview.center.y = 22
+		m_preview.titleLabelFrame = m_preview.bounds
+		m_preview.titleLabel?.textAlignment = .left
 		m_preview.titleLabel?.font = UIFont(name: "PingFang-SC-Regular", size: 14)
+		m_preview.setTitle("预览", for: .normal)
 		m_preview.setTitleColor(UIColor.white, for: .normal)
 		m_preview.setTitleColor(UIColor.lightGray, for: .disabled)
 		m_preview.addTarget(self, action: #selector(previewClick), for: .touchUpInside)
 		
-		m_done = UIButton(type: .custom)
-		m_done.frame = CGRect(x: kScreenWidth-17-46, y: 12, width: 46, height: 20)
-		m_done.titleLabel?.font = UIFont(name: "PingFang-SC-Regular", size: 14)
-		m_done.setTitleColor(UIColor.white, for: .normal)
-		m_done.setTitleColor(UIColor.lightGray, for: .disabled)
+		m_done = MySelectPhotoDoneButton(frame: CGRect(x: kScreenWidth-63, y: 0, width: 63, height: 30))
+		m_done.center.y = 22
 		m_done.addTarget(self, action: #selector(doneClick), for: .touchUpInside)
 		
 		m_bottomView.addSubview(m_preview)
@@ -166,9 +165,7 @@ extension MyPhotoGridVC {
 	fileprivate func updateToolBarView() {
 		enableItems()
 		
-		let selectedCount = MyPhotoSelectManager.defaultManager.m_selectedItems.count
-		let title = selectedCount > 0 ? "完成(\(selectedCount))" : "完成"
-		m_done.setTitle(title, for: .normal)
+		m_done.updateView()
 	}
 	
 	fileprivate func scrollToBottom() {
@@ -221,17 +218,26 @@ extension MyPhotoGridVC {
 extension MyPhotoGridVC: MyPhotoGridCellDelegate {
 	func myPhotoGridCellButtonSelect(cell: MyPhotoGridCell) {
 		
+		let lastSelectedIndex = MyPhotoSelectManager.defaultManager.m_selectedIndex
+		
 		let selectedItem = MySelectedItem.init(asset: cell.m_data.m_asset, index: cell.m_data.m_index)
-		MyPhotoSelectManager.defaultManager.updateSelectItems(vcToShowAlert: self, button: cell.m_selectButton, selectedItem: selectedItem)
+		MyPhotoSelectManager.defaultManager.updateSelectItems(vcToShowAlert: self, button: cell.m_selectedCountView.m_selectButton, selectedItem: selectedItem)
 		
 		updateToolBarView()
-        
-        for indexPath in MyPhotoSelectManager.defaultManager.m_selectedIndex {
+		
+		var needUpdateIndex = lastSelectedIndex
+		
+		for indexPath in MyPhotoSelectManager.defaultManager.m_selectedIndex {
+			if !needUpdateIndex.contains(indexPath) {
+				needUpdateIndex.append(indexPath)
+			}
+		}
+		
+        for indexPath in needUpdateIndex {
             if let cell = m_collectionView.cellForItem(at: indexPath) as? MyPhotoGridCell {
                 cell.updateCellBadge()
             }
         }
-//		m_collectionView.reloadItems(at: MyPhotoSelectManager.defaultManager.m_selectedIndex)
 	}
 }
 
@@ -250,7 +256,7 @@ extension MyPhotoGridVC: UICollectionViewDelegate, UICollectionViewDataSource {
 		
 		cell.updateData(asset, size: m_assetGridThumbnailSize, indexPath: indexPath)
 		
-		cell.m_selectButton.isSelected = MyPhotoSelectManager.defaultManager.m_selectedIndex.contains(indexPath)
+		cell.m_selectedCountView.m_selectButton.isSelected = MyPhotoSelectManager.defaultManager.m_selectedIndex.contains(indexPath)
 
 		return cell
 	}
