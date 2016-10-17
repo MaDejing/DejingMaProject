@@ -33,7 +33,7 @@ class MyPhotoGridCell: UICollectionViewCell {
 		m_imageView = UIImageView(frame: self.bounds)
 		
 		let selectViewWidth: CGFloat = 23.0
-		let delta: CGFloat = 2.0
+		let delta: CGFloat = 4.0
 		let selectViewFrame = CGRect(x: self.bounds.width-45, y: 0, width: 45, height: 45)
 		let bgViewFrame = CGRect(x: 45-selectViewWidth-delta, y: delta, width: selectViewWidth, height: selectViewWidth)
 		

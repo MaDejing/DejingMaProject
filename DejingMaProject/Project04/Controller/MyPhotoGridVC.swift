@@ -36,9 +36,9 @@ class MyPhotoGridVC: UIViewController {
 	fileprivate var m_itemWidth: CGFloat = 0.0
 	fileprivate let m_minLineSpace: CGFloat = 4.0
 	fileprivate let m_minItemSpace: CGFloat = 4.0
-	fileprivate let m_collectionTop: CGFloat = 2
+	fileprivate let m_collectionTop: CGFloat = 0.0
 	fileprivate let m_collectionLeft: CGFloat = 2
-	fileprivate let m_collectionBottom: CGFloat = 2
+	fileprivate let m_collectionBottom: CGFloat = 0.0
 	fileprivate let m_collectionRight: CGFloat = 2
 	
 	/// 数据相关
@@ -129,14 +129,14 @@ extension MyPhotoGridVC {
 		m_bottomView = UIView(frame: CGRect(x: 0, y: kScreenHeight-44, width: kScreenWidth, height: 44))
 		m_bottomView.backgroundColor = UIColor.black
 		
-		m_preview = YLButton(frame: CGRect(x: 17, y: 0, width: 46, height: 30))
+		m_preview = YLButton(frame: CGRect(x: 20, y: 0, width: 46, height: 30))
 		m_preview.center.y = 22
 		m_preview.titleLabelFrame = m_preview.bounds
 		m_preview.titleLabel?.textAlignment = .left
-		m_preview.titleLabel?.font = UIFont(name: "PingFang-SC-Regular", size: 14)
+		m_preview.titleLabel?.font = UIFont(name: "PingFang-SC-Regular", size: 16)
 		m_preview.setTitle("预览", for: .normal)
 		m_preview.setTitleColor(UIColor.white, for: .normal)
-		m_preview.setTitleColor(UIColor.lightGray, for: .disabled)
+        m_preview.setTitleColor(UIColor(white: 1.0, alpha: 0.5), for: .disabled)
 		m_preview.addTarget(self, action: #selector(previewClick), for: .touchUpInside)
 		
 		m_done = MySelectPhotoDoneButton(frame: CGRect(x: kScreenWidth-63, y: 0, width: 63, height: 30))

@@ -17,7 +17,7 @@ class MySelectPhotoDoneButton: YLButton {
 		self.titleLabel?.font = UIFont(name: "PingFang-SC-Regular", size: 14)
 		self.titleLabel?.textAlignment = .left
 		self.setTitleColor(UIColor.white, for: .normal)
-		self.setTitleColor(UIColor.lightGray, for: .disabled)
+        self.setTitleColor(UIColor(white: 1.0, alpha: 0.5), for: .disabled)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {

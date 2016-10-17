@@ -40,7 +40,9 @@ class MyPhotoPickerVC: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		title = "照片库"
+		title = "照片"
+        
+        view.backgroundColor = UIColor.color(RGBHEX: 0x232329, alpha: 1.0)
 		
 		initData()
 			
@@ -82,6 +84,7 @@ extension MyPhotoPickerVC {
 		navigationItem.rightBarButtonItem = rightBarItem
 
 		m_tableView = UITableView(frame: self.view.bounds, style: .plain)
+        m_tableView.backgroundColor = UIColor.color(RGBHEX: 0x232329, alpha: 1.0)
 		m_tableView.delegate = self
 		m_tableView.dataSource = self
 		
