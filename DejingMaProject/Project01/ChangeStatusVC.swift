@@ -21,6 +21,8 @@ class ChangeStatusVC: UIViewController {
 
         // Do any additional setup after loading the view.
 		
+		view.backgroundColor = UIColor.white
+		
 		let rightItem = UIBarButtonItem.init(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
 		rightItem.tintColor = UIColor.red
 		navigationItem.rightBarButtonItem = rightItem

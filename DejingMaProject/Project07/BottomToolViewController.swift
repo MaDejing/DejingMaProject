@@ -62,8 +62,23 @@ extension BottomToolViewController: BottomToolViewDelegate {
     func afterPhotoPickerClick(bottomToolView: BottomToolView) {
         m_bottomToolView.dismiss()
         let photoLibrayStatus: PHAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
-        
-        if photoLibrayStatus == .denied || photoLibrayStatus == .restricted {
+		if photoLibrayStatus == .notDetermined {
+			PHPhotoLibrary.requestAuthorization { (status) in
+				DispatchQueue.main.async { [weak self] in
+					if status == PHAuthorizationStatus.denied || status == PHAuthorizationStatus.restricted {
+						let vc = ChangeStatusVC()
+						let nav = UINavigationController(rootViewController: vc)
+						nav.navigationBar.isTranslucent = true
+						self?.present(nav, animated: true, completion: nil)
+					} else if status == PHAuthorizationStatus.authorized {
+						let vc = MyPhotoPickerVC()
+						let nav = UINavigationController(rootViewController: vc)
+						nav.navigationBar.isTranslucent = true
+						self?.present(nav, animated: true, completion: nil)
+					}
+				}
+			}
+		} else if photoLibrayStatus == .denied || photoLibrayStatus == .restricted {
             let alert = UIAlertController(title: nil, message: "请您设置允许APP访问您的照片\n设置>隐私>照片", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "确定", style: .cancel, handler: nil)
             
@@ -82,7 +97,20 @@ extension BottomToolViewController: BottomToolViewDelegate {
         m_bottomToolView.dismiss()
 
         let authStatus: AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
-		if authStatus == .denied || authStatus == .restricted {
+		if authStatus == .notDetermined {
+			AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted) in
+				DispatchQueue.main.async { [weak self] in
+					if !granted {
+						let vc = ChangeStatusVC()
+						let nav = UINavigationController(rootViewController: vc)
+						nav.navigationBar.isTranslucent = true
+						self?.present(nav, animated: true, completion: nil)
+					} else {
+						self?.present((self?.imagePickerController)!, animated: true, completion: nil)
+					}
+				}
+			})
+		} else if authStatus == .denied || authStatus == .restricted {
 			let alert = UIAlertController(title: nil, message: "请您设置允许APP访问您的相机\n设置>隐私>相机", preferredStyle: .alert)
 			let cancelAction = UIAlertAction(title: "确定", style: .cancel, handler: nil)
 			

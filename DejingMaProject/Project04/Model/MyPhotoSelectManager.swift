@@ -40,8 +40,8 @@ class MyPhotoSelectManager: NSObject {
 	/// - parameter selectedItem:  被选择的资源
 	func updateSelectItems(vcToShowAlert: UIViewController, button: UIButton, selectedItem: MySelectedItem, keepOrigin: Bool = false, sIndex: Int? = nil) {
 		if self.m_selectedItems.count >= maxCount && !button.isSelected {
-			let alert = UIAlertController(title: nil, message: "最多可选择\(maxCount)张照片", preferredStyle: .alert)
-			let cancelAction = UIAlertAction(title: "确定", style: .cancel, handler: nil)
+			let alert = UIAlertController(title: nil, message: "你最多只能选择\(maxCount)张照片", preferredStyle: .alert)
+			let cancelAction = UIAlertAction(title: "我知道了", style: .cancel, handler: nil)
 			
 			alert.addAction(cancelAction)
 			

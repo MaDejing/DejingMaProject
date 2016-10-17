@@ -42,13 +42,9 @@ class MyPhotoPickerVC: UIViewController {
 		
 		title = "照片库"
 		
-		let photoLibrayStatus: PHAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
-//		if photoLibrayStatus == .authorized {
-		
-			initData()
+		initData()
 			
-			initSubViews()
-//		}
+		initSubViews()
 
 	}
 	
