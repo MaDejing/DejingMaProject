@@ -40,26 +40,27 @@ class MyPhotoPickerCell: UITableViewCell {
 		m_imageView.contentMode = .scaleAspectFill
 		m_imageView.layer.masksToBounds = true
 		
-		m_title = UILabel(frame: CGRect(x: 95, y: 0, width: 100, height: 24))
+		m_title = UILabel(frame: CGRect(x: 95, y: 0, width: kScreenWidth-95, height: 30))
 		m_title.center.y = 40
-		m_title.font = UIFont(name: "PingFang-SC-Regular", size: 17)
-		m_title.textColor = UIColor.black
-		
-		m_count = UILabel(frame: CGRect(x: 200, y: 0, width: 50, height: 21))
-		m_count.center.y = 40
-		m_count.font = UIFont(name: "PingFang-SC-Regular", size: 15)
-		m_count.textColor = UIColor.black
-		
+
 		contentView.addSubview(m_imageView)
 		contentView.addSubview(m_title)
-		contentView.addSubview(m_count)
 	}
 	
 	func updateRowWithData(_ data: MyPhotoAlbumItem) {
-		m_title.text = data.m_title;
+		
+		let title = NSMutableAttributedString()
+		
+		let nameDic = [NSFontAttributeName: UIFont.getFont(name: "PingFang-SC-Regular", size: 17), NSForegroundColorAttributeName: UIColor.black]
+		let name = NSAttributedString(string: data.m_title, attributes: nameDic)
+		title.append(name)
 		
 		let content: PHFetchResult = data.m_content
-		m_count.text = "(\(content.count))";
+		let countDic = [NSFontAttributeName: UIFont.getFont(name: "PingFang-SC-Regular", size: 15), NSForegroundColorAttributeName: UIColor.gray]
+		let count = NSAttributedString(string: "(\(content.count))", attributes: countDic)
+		title.append(count)
+		
+		m_title.attributedText = title
 		
 		let lastAssert = content.lastObject as! PHAsset
 		let imageWidth = MyPhotoPickerCell.getCellHeight()-10
