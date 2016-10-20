@@ -146,7 +146,11 @@ extension MyPhotoPreviewVC {
 	}
 	
 	func updateTopView() {
-		let indexPath = IndexPath(item: m_curIndex, section: 0)
+		
+		let asset = m_assets[m_curIndex]
+		let indexInAll = m_allAssets.index(of: asset)
+		
+		let indexPath = IndexPath(item: indexInAll!, section: 0)
 		m_selectedCountView.m_selectButton.isSelected = MyPhotoSelectManager.defaultManager.contains(item: indexPath)
 
 		if m_selectedCountView.m_selectButton.isSelected {
@@ -183,13 +187,16 @@ extension MyPhotoPreviewVC {
 // MARK: - IBActions
 extension MyPhotoPreviewVC {
 	
-	func back() {
+	@objc fileprivate func back() {
 		_ = navigationController?.popViewController(animated: true)
 	}
 	
-	func selectClick() {
-		let indexPath = IndexPath(item: m_curIndex, section: 0)
-		let selectedItem = MySelectedItem.init(asset: m_allAssets[m_curIndex], index: indexPath)
+	@objc fileprivate func selectClick() {
+		let asset = m_assets[m_curIndex]
+		let indexInAll = m_allAssets.index(of: asset)
+		let indexPath = IndexPath(item: indexInAll!, section: 0)
+		
+		let selectedItem = MySelectedItem.init(asset: asset, index: indexPath)
 
 		let button: YLButton = m_selectedCountView.m_selectButton
 		
@@ -214,7 +221,7 @@ extension MyPhotoPreviewVC {
 		}
 	}
 	
-    func doneClick() {
+    @objc fileprivate func doneClick() {
 		MyPhotoSelectManager.defaultManager.doSend(vcToDismiss: self)
     }
 	

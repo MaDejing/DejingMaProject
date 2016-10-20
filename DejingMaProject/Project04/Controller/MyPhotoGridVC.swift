@@ -121,7 +121,7 @@ extension MyPhotoGridVC {
 		collectionViewFlowLayout.minimumInteritemSpacing = m_minItemSpace
 		collectionViewFlowLayout.sectionInset = UIEdgeInsetsMake(m_collectionTop, m_collectionLeft, m_collectionBottom, m_collectionRight)
 		collectionViewFlowLayout.itemSize = CGSize(width: m_itemWidth, height: m_itemWidth)
-		
+				
 		view.addSubview(m_collectionView)
     }
 	
@@ -191,11 +191,11 @@ extension MyPhotoGridVC {
 // MARK: - Functions
 extension MyPhotoGridVC {
 
-	func cancel() {
+	@objc fileprivate func cancel() {
 		navigationController?.dismiss(animated: true, completion: nil)
 	}
 	
-	func previewClick() {
+	@objc fileprivate func previewClick() {
 		let vc = MyPhotoPreviewVC()
 		
 		var assets: [PHAsset] = []
@@ -209,7 +209,7 @@ extension MyPhotoGridVC {
 		navigationController?.pushViewController(vc, animated: true)
 	}
 	
-	func doneClick() {
+	@objc fileprivate func doneClick() {
 		MyPhotoSelectManager.defaultManager.doSend(vcToDismiss: self)
 	}
 }

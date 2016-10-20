@@ -51,7 +51,7 @@ class BottomToolView: UIView {
         m_redPacketButton.setImage(UIImage(named: "image01"), for: .normal)
         m_redPacketButton.setImage(UIImage(named: "image01"), for: .highlighted)
         m_redPacketButton.setTitle("发红包", for: .normal)
-        m_redPacketButton.addTarget(self, action: #selector(BottomToolView.redPacketClick), for: .touchUpInside)
+		m_redPacketButton.addTarget(self, action: #selector(BottomToolView.redPacketClick), for: .touchUpInside)
         
         m_photoPickerButton.setImage(UIImage(named: "image01"), for: .normal)
         m_photoPickerButton.setImage(UIImage(named: "image01"), for: .highlighted)
@@ -114,15 +114,15 @@ extension BottomToolView {
 
 extension BottomToolView {
     
-    func redPacketClick() {
+	@objc fileprivate func redPacketClick(sender: UIButton) {
         m_delegate?.afterRedPacketClick(bottomToolView: self)
     }
     
-    func photoPickerClick() {
+	@objc fileprivate func photoPickerClick() {
         m_delegate?.afterPhotoPickerClick(bottomToolView: self)
     }
     
-    func cameraClick() {
+    @objc fileprivate func cameraClick() {
         m_delegate?.afterCameraClick(bottomToolView: self)
     }
 }
