@@ -100,7 +100,7 @@ class MyPhotoGridCell: UICollectionViewCell {
 		}
     }
 	
-	@objc fileprivate func photoSelect() {
+	@objc fileprivate func photoSelect(sender: UIButton) {
 		m_delegate!.myPhotoGridCellButtonSelect(cell: self)
 	}
 	

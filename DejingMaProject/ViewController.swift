@@ -115,6 +115,11 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
 	
+	@IBAction func pushToBottomTab(_ sender: AnyObject) {
+		let vc  = BottomTabViewController()
+//		present(vc, animated: true, completion: nil)
+	}
+	
 	func panAction(_ ges: UIPanGestureRecognizer) {
 		//1.取到图片中点坐标
 		let centerPoint = firstView.center

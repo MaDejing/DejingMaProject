@@ -118,11 +118,11 @@ extension BottomToolView {
         m_delegate?.afterRedPacketClick(bottomToolView: self)
     }
     
-	@objc fileprivate func photoPickerClick() {
+	@objc fileprivate func photoPickerClick(sender: UIButton) {
         m_delegate?.afterPhotoPickerClick(bottomToolView: self)
     }
     
-    @objc fileprivate func cameraClick() {
+    @objc fileprivate func cameraClick(sender: UIButton) {
         m_delegate?.afterCameraClick(bottomToolView: self)
     }
 }

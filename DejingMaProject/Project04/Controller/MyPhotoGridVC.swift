@@ -195,7 +195,7 @@ extension MyPhotoGridVC {
 		navigationController?.dismiss(animated: true, completion: nil)
 	}
 	
-	@objc fileprivate func previewClick() {
+	@objc fileprivate func previewClick(sender: UIButton) {
 		let vc = MyPhotoPreviewVC()
 		
 		var assets: [PHAsset] = []
@@ -209,7 +209,7 @@ extension MyPhotoGridVC {
 		navigationController?.pushViewController(vc, animated: true)
 	}
 	
-	@objc fileprivate func doneClick() {
+	@objc fileprivate func doneClick(sender: UIButton) {
 		MyPhotoSelectManager.defaultManager.doSend(vcToDismiss: self)
 	}
 }

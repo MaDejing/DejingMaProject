@@ -187,11 +187,11 @@ extension MyPhotoPreviewVC {
 // MARK: - IBActions
 extension MyPhotoPreviewVC {
 	
-	@objc fileprivate func back() {
+	@objc fileprivate func back(sender: UIButton) {
 		_ = navigationController?.popViewController(animated: true)
 	}
 	
-	@objc fileprivate func selectClick() {
+	@objc fileprivate func selectClick(sender: UIButton) {
 		let asset = m_assets[m_curIndex]
 		let indexInAll = m_allAssets.index(of: asset)
 		let indexPath = IndexPath(item: indexInAll!, section: 0)
@@ -221,7 +221,7 @@ extension MyPhotoPreviewVC {
 		}
 	}
 	
-    @objc fileprivate func doneClick() {
+    @objc fileprivate func doneClick(sender: UIButton) {
 		MyPhotoSelectManager.defaultManager.doSend(vcToDismiss: self)
     }
 	
