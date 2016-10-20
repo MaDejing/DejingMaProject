@@ -93,18 +93,19 @@ class MyPhotoSelectManager: NSObject {
 	///
 	/// - parameter vcToDismiss: 需要dismiss的VC
 	func doSend(vcToDismiss: UIViewController) {
-//		print(MyPhotoSelectManager.defaultManager.m_selectedItems)
-        
         m_sendItems.removeAll()
         for item in MyPhotoSelectManager.defaultManager.m_selectedItems {
             let asset = item.m_asset
-            
-            _ = MyPhotoImageManager.defaultManager.getPhotoWithAsset(asset!, size: PHImageManagerMaximumSize, options: nil, completion: { (image, _, _) in
-                
-                self.m_sendItems.append(image)
-                
-                print(image)
-            })
+		
+			_ = PHImageManager.default().requestImage(for: asset!, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: nil, resultHandler: { [weak self] (image, info) in
+				
+				let isDegraded: Bool = info?["PHImageResultIsDegradedKey"] as! Bool
+				guard !isDegraded else { return }
+
+				self?.m_sendItems.append(image!)
+				print("我是要发送的", image)
+
+			})
         }
         
         
