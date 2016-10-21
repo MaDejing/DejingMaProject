@@ -66,10 +66,10 @@ extension BottomToolViewController: BottomToolViewDelegate {
 			PHPhotoLibrary.requestAuthorization { (status) in
 				DispatchQueue.main.async { [weak self] in
 					if status == PHAuthorizationStatus.denied || status == PHAuthorizationStatus.restricted {
-						let vc = ChangeStatusVC()
-						let nav = UINavigationController(rootViewController: vc)
-						nav.navigationBar.isTranslucent = true
-						self?.present(nav, animated: true, completion: nil)
+//						let vc = ChangeStatusVC()
+//						let nav = UINavigationController(rootViewController: vc)
+//						nav.navigationBar.isTranslucent = true
+//						self?.present(nav, animated: true, completion: nil)
 					} else if status == PHAuthorizationStatus.authorized {
 						let vc = MyPhotoPickerVC()
 						let nav = UINavigationController(rootViewController: vc)
@@ -101,10 +101,10 @@ extension BottomToolViewController: BottomToolViewDelegate {
 			AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted) in
 				DispatchQueue.main.async { [weak self] in
 					if !granted {
-						let vc = ChangeStatusVC()
-						let nav = UINavigationController(rootViewController: vc)
-						nav.navigationBar.isTranslucent = true
-						self?.present(nav, animated: true, completion: nil)
+//						let vc = ChangeStatusVC()
+//						let nav = UINavigationController(rootViewController: vc)
+//						nav.navigationBar.isTranslucent = true
+//						self?.present(nav, animated: true, completion: nil)
 					} else {
 						self?.present((self?.imagePickerController)!, animated: true, completion: nil)
 					}
