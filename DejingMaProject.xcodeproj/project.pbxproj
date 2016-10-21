@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CF1F21631DB4761A00F4F6F6 /* MyPhotoSelectCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1F21621DB4761A00F4F6F6 /* MyPhotoSelectCountView.swift */; };
+		CF26778E1DB9B2B8000FFF97 /* Present01ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF26778D1DB9B2B8000FFF97 /* Present01ViewController.swift */; };
+		CF2677901DB9B367000FFF97 /* Present02ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF26778F1DB9B367000FFF97 /* Present02ViewController.swift */; };
+		CF2677921DB9B918000FFF97 /* Push01ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2677911DB9B918000FFF97 /* Push01ViewController.swift */; };
 		CF31AACA1D9B5395002CF8E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AAC91D9B5395002CF8E3 /* AppDelegate.swift */; };
 		CF31AACC1D9B5395002CF8E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31AACB1D9B5395002CF8E3 /* ViewController.swift */; };
 		CF31AACF1D9B5395002CF8E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF31AACD1D9B5395002CF8E3 /* Main.storyboard */; };
@@ -40,7 +43,7 @@
 		CF4C12861DAC785800180AFA /* MyPhotoPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C127B1DAC785800180AFA /* MyPhotoPreviewCell.swift */; };
 		CF4C128A1DAC859D00180AFA /* GridCellButtonSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF4C12881DAC859D00180AFA /* GridCellButtonSelected@2x.png */; };
 		CF4C128B1DAC859D00180AFA /* GridCellButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF4C12891DAC859D00180AFA /* GridCellButton@2x.png */; };
-		CF603ACA1DB85223001AA9E9 /* BottomTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF603AC91DB85223001AA9E9 /* BottomTabViewController.swift */; };
+		CF603ACA1DB85223001AA9E9 /* MultiDismissViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF603AC91DB85223001AA9E9 /* MultiDismissViewController.swift */; };
 		CF8BB1171DB46A4E008132C7 /* MySelectPhotoDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8BB1161DB46A4E008132C7 /* MySelectPhotoDoneButton.swift */; };
 		CFFD7BA21DADCA78004A72AF /* SysCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7BA11DADCA78004A72AF /* SysCameraViewController.swift */; };
 		F237A4DB1DB1F72F00A58730 /* PageEnableScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F237A4DA1DB1F72F00A58730 /* PageEnableScrollViewController.swift */; };
@@ -111,6 +114,9 @@
 
 /* Begin PBXFileReference section */
 		CF1F21621DB4761A00F4F6F6 /* MyPhotoSelectCountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotoSelectCountView.swift; sourceTree = "<group>"; };
+		CF26778D1DB9B2B8000FFF97 /* Present01ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Present01ViewController.swift; sourceTree = "<group>"; };
+		CF26778F1DB9B367000FFF97 /* Present02ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Present02ViewController.swift; sourceTree = "<group>"; };
+		CF2677911DB9B918000FFF97 /* Push01ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Push01ViewController.swift; sourceTree = "<group>"; };
 		CF31AAC61D9B5395002CF8E3 /* DejingMaProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DejingMaProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF31AAC91D9B5395002CF8E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF31AACB1D9B5395002CF8E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -150,7 +156,7 @@
 		CF4C127B1DAC785800180AFA /* MyPhotoPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotoPreviewCell.swift; sourceTree = "<group>"; };
 		CF4C12881DAC859D00180AFA /* GridCellButtonSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GridCellButtonSelected@2x.png"; sourceTree = "<group>"; };
 		CF4C12891DAC859D00180AFA /* GridCellButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GridCellButton@2x.png"; sourceTree = "<group>"; };
-		CF603AC91DB85223001AA9E9 /* BottomTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomTabViewController.swift; sourceTree = "<group>"; };
+		CF603AC91DB85223001AA9E9 /* MultiDismissViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiDismissViewController.swift; sourceTree = "<group>"; };
 		CF8BB1161DB46A4E008132C7 /* MySelectPhotoDoneButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySelectPhotoDoneButton.swift; sourceTree = "<group>"; };
 		CFFD7BA11DADCA78004A72AF /* SysCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SysCameraViewController.swift; sourceTree = "<group>"; };
 		F237A4DA1DB1F72F00A58730 /* PageEnableScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageEnableScrollViewController.swift; sourceTree = "<group>"; };
@@ -404,7 +410,10 @@
 		CF603AC81DB85202001AA9E9 /* Project08 */ = {
 			isa = PBXGroup;
 			children = (
-				CF603AC91DB85223001AA9E9 /* BottomTabViewController.swift */,
+				CF603AC91DB85223001AA9E9 /* MultiDismissViewController.swift */,
+				CF26778D1DB9B2B8000FFF97 /* Present01ViewController.swift */,
+				CF2677911DB9B918000FFF97 /* Push01ViewController.swift */,
+				CF26778F1DB9B367000FFF97 /* Present02ViewController.swift */,
 			);
 			path = Project08;
 			sourceTree = "<group>";
@@ -709,6 +718,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF26778E1DB9B2B8000FFF97 /* Present01ViewController.swift in Sources */,
 				F291DD541DB3724A00220384 /* UIImage+GIF.m in Sources */,
 				F291DD1E1DB36D8E00220384 /* YLUnreadImageView.swift in Sources */,
 				F291DD4C1DB3724A00220384 /* SDImageCache.m in Sources */,
@@ -736,6 +746,7 @@
 				CF31AACA1D9B5395002CF8E3 /* AppDelegate.swift in Sources */,
 				F291DD531DB3724A00220384 /* UIButton+WebCache.m in Sources */,
 				F291DD241DB36D8E00220384 /* YLImageCollection.swift in Sources */,
+				CF2677901DB9B367000FFF97 /* Present02ViewController.swift in Sources */,
 				F291DD271DB36D8E00220384 /* YLImageCollectionPageViewConfig.swift in Sources */,
 				CF4C12691DAC781600180AFA /* HitTestScrollView.swift in Sources */,
 				F291DD221DB36D8E00220384 /* UIColor+YLCommonKit.swift in Sources */,
@@ -755,7 +766,7 @@
 				F291DD161DB36D8E00220384 /* String+YLBaseKit.swift in Sources */,
 				CF8BB1171DB46A4E008132C7 /* MySelectPhotoDoneButton.swift in Sources */,
 				F291DD0C1DB36D8E00220384 /* YLButton.swift in Sources */,
-				CF603ACA1DB85223001AA9E9 /* BottomTabViewController.swift in Sources */,
+				CF603ACA1DB85223001AA9E9 /* MultiDismissViewController.swift in Sources */,
 				F291DD571DB3724A00220384 /* UIImageView+WebCache.m in Sources */,
 				F291DD141DB36D8E00220384 /* NSDate+YLBaseKit.swift in Sources */,
 				F291DD151DB36D8E00220384 /* NSString+YLBaseKit.swift in Sources */,
@@ -770,6 +781,7 @@
 				CF45CD381D9CD8B200369340 /* PullToRefresh.swift in Sources */,
 				F291DD131DB36D8E00220384 /* Array+YLBaseKit.swift in Sources */,
 				CF4C125B1DAC77D400180AFA /* ChangeStatusVC.swift in Sources */,
+				CF2677921DB9B918000FFF97 /* Push01ViewController.swift in Sources */,
 				F291DD251DB36D8E00220384 /* YLImageCollectionPageCollectionViewCell.swift in Sources */,
 				CF4C127E1DAC785800180AFA /* MyPhotoPreviewVC.swift in Sources */,
 				CF4C12861DAC785800180AFA /* MyPhotoPreviewCell.swift in Sources */,

@@ -107,8 +107,7 @@ class MyPhotoSelectManager: NSObject {
 
 			})
         }
-        
-        
+		
 		vcToDismiss.dismiss(animated: true, completion: nil)
 		MyPhotoSelectManager.defaultManager.clearData()
 	}

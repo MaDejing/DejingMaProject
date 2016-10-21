@@ -115,9 +115,9 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
 	
-	@IBAction func pushToBottomTab(_ sender: AnyObject) {
-		let vc  = BottomTabViewController()
-//		present(vc, animated: true, completion: nil)
+	@IBAction func pushToMultiDismiss(_ sender: AnyObject) {
+		let vc  = MultiDismissViewController()
+		navigationController?.pushViewController(vc, animated: true)
 	}
 	
 	func panAction(_ ges: UIPanGestureRecognizer) {

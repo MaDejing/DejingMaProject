@@ -87,9 +87,9 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3on-lg-EKk">
-                                                <state key="normal" title="底部Tab"/>
+                                                <state key="normal" title="多个dismiss后返回"/>
                                                 <connections>
-                                                    <action selector="pushToBottomTab:" destination="mKq-ti-3nx" eventType="touchUpInside" id="wJa-Hk-6w6"/>
+                                                    <action selector="pushToMultiDismiss:" destination="mKq-ti-3nx" eventType="touchUpInside" id="Vtj-gF-tc7"/>
                                                 </connections>
                                             </button>
                                         </subviews>
