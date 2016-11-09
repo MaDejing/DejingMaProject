@@ -10,7 +10,7 @@ import UIKit
 
 class MDJImageVC: UIViewController {
 
-	fileprivate var m_imageView: MDJImageView!
+	fileprivate var m_imageView: MDJScrollImageView!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,18 +30,10 @@ class MDJImageVC: UIViewController {
     }
 	
 	@objc fileprivate func showImageView(_ sender: UIButton) {
-		m_imageView = MDJImageView(frame: CGRect(x: 50, y: 100, width: 300, height: 300), mode: .aspectFit, maxZoomScale: 2.0, minZoomScale: 0.5)
-		m_imageView.updateWithImage(UIImage(named: "image01")!)
-		
-		m_imageView.m_delegate = self
-		
+        m_imageView = MDJScrollImageView(frame: CGRect(x: 0, y: 100, width: 200, height: 500), mode: .aspectFit, maxZoomScale: 2.0, minZoomScale: 0.5)
+		m_imageView.setWithImage(name: "image01")
+				
 		view.addSubview(m_imageView)
 	}
 
-}
-
-extension MDJImageVC: MDJImageViewDelegate {
-	func afterSingleTap(_ view: MDJImageView) {
-		m_imageView.removeFromSuperview()
-	}
 }

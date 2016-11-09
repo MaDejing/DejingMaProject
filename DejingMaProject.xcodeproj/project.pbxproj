@@ -46,7 +46,7 @@
 		CF603ACA1DB85223001AA9E9 /* MultiDismissViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF603AC91DB85223001AA9E9 /* MultiDismissViewController.swift */; };
 		CF626A091DD2F91900D95607 /* MDJImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF626A081DD2F91900D95607 /* MDJImageVC.swift */; };
 		CF8BB1171DB46A4E008132C7 /* MySelectPhotoDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8BB1161DB46A4E008132C7 /* MySelectPhotoDoneButton.swift */; };
-		CFF09F071DD2D766000777C5 /* MDJImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF09F061DD2D766000777C5 /* MDJImageView.swift */; };
+		CFF09F071DD2D766000777C5 /* MDJScrollImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF09F061DD2D766000777C5 /* MDJScrollImageView.swift */; };
 		CFFD7BA21DADCA78004A72AF /* SysCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7BA11DADCA78004A72AF /* SysCameraViewController.swift */; };
 		F237A4DB1DB1F72F00A58730 /* PageEnableScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F237A4DA1DB1F72F00A58730 /* PageEnableScrollViewController.swift */; };
 		F237A4DE1DB3243600A58730 /* BottomToolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F237A4DD1DB3243600A58730 /* BottomToolViewController.swift */; };
@@ -95,6 +95,7 @@
 		F291DD581DB3724A00220384 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F291DD4A1DB3724A00220384 /* UIView+WebCacheOperation.m */; };
 		F291DD5A1DB375F300220384 /* BottomToolViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F291DD591DB375F300220384 /* BottomToolViewConfig.swift */; };
 		F291DD5C1DB3884E00220384 /* BottomToolViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F291DD5B1DB3884E00220384 /* BottomToolViewButton.swift */; };
+		F2995C0D1DD374C400BBBA5E /* MDJBaseImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2995C0C1DD374C400BBBA5E /* MDJBaseImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,7 +162,7 @@
 		CF603AC91DB85223001AA9E9 /* MultiDismissViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiDismissViewController.swift; sourceTree = "<group>"; };
 		CF626A081DD2F91900D95607 /* MDJImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDJImageVC.swift; sourceTree = "<group>"; };
 		CF8BB1161DB46A4E008132C7 /* MySelectPhotoDoneButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySelectPhotoDoneButton.swift; sourceTree = "<group>"; };
-		CFF09F061DD2D766000777C5 /* MDJImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDJImageView.swift; sourceTree = "<group>"; };
+		CFF09F061DD2D766000777C5 /* MDJScrollImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDJScrollImageView.swift; sourceTree = "<group>"; };
 		CFFD7BA11DADCA78004A72AF /* SysCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SysCameraViewController.swift; sourceTree = "<group>"; };
 		F237A4DA1DB1F72F00A58730 /* PageEnableScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageEnableScrollViewController.swift; sourceTree = "<group>"; };
 		F237A4DD1DB3243600A58730 /* BottomToolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomToolViewController.swift; sourceTree = "<group>"; };
@@ -226,6 +227,7 @@
 		F291DD4A1DB3724A00220384 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		F291DD591DB375F300220384 /* BottomToolViewConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomToolViewConfig.swift; sourceTree = "<group>"; };
 		F291DD5B1DB3884E00220384 /* BottomToolViewButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomToolViewButton.swift; sourceTree = "<group>"; };
+		F2995C0C1DD374C400BBBA5E /* MDJBaseImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDJBaseImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -427,7 +429,8 @@
 			isa = PBXGroup;
 			children = (
 				CF626A081DD2F91900D95607 /* MDJImageVC.swift */,
-				CFF09F061DD2D766000777C5 /* MDJImageView.swift */,
+				F2995C0C1DD374C400BBBA5E /* MDJBaseImageView.swift */,
+				CFF09F061DD2D766000777C5 /* MDJScrollImageView.swift */,
 			);
 			path = Project09;
 			sourceTree = "<group>";
@@ -749,7 +752,7 @@
 				F237A4DB1DB1F72F00A58730 /* PageEnableScrollViewController.swift in Sources */,
 				CF4C12851DAC785800180AFA /* MyPhotoPickerCell.swift in Sources */,
 				F291DD201DB36D8E00220384 /* String+YLCommonKit.swift in Sources */,
-				CFF09F071DD2D766000777C5 /* MDJImageView.swift in Sources */,
+				CFF09F071DD2D766000777C5 /* MDJScrollImageView.swift in Sources */,
 				F291DD501DB3724A00220384 /* SDWebImageDownloaderOperation.m in Sources */,
 				F291DD261DB36D8E00220384 /* YLImageCollectionPageView.swift in Sources */,
 				F291DD4B1DB3724A00220384 /* NSData+ImageContentType.m in Sources */,
@@ -812,6 +815,7 @@
 				F291DD5A1DB375F300220384 /* BottomToolViewConfig.swift in Sources */,
 				F291DD1F1DB36D8E00220384 /* NSString+YLCommonKit.swift in Sources */,
 				CF45CD361D9CD8B200369340 /* DefaultViewAnimator.swift in Sources */,
+				F2995C0D1DD374C400BBBA5E /* MDJBaseImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
