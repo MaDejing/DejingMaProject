@@ -92,6 +92,12 @@
                                                     <action selector="pushToMultiDismiss:" destination="mKq-ti-3nx" eventType="touchUpInside" id="Vtj-gF-tc7"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="112-Kp-JAs">
+                                                <state key="normal" title="MDJImageView"/>
+                                                <connections>
+                                                    <action selector="pushToMDJImageView:" destination="mKq-ti-3nx" eventType="touchUpInside" id="1at-wy-1mE"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -104,11 +110,13 @@
                                             <constraint firstItem="d7u-1g-8fJ" firstAttribute="top" secondItem="UfW-GF-UPg" secondAttribute="bottom" constant="8" id="TXf-ze-u7M"/>
                                             <constraint firstItem="ZxH-Zb-g0Y" firstAttribute="top" secondItem="sIx-OO-1Pa" secondAttribute="bottom" constant="8" id="Vko-tB-1RN"/>
                                             <constraint firstItem="UfW-GF-UPg" firstAttribute="top" secondItem="fWc-H4-pgc" secondAttribute="bottom" constant="8" id="bVb-vT-Yza"/>
+                                            <constraint firstItem="112-Kp-JAs" firstAttribute="leading" secondItem="4cr-37-Iqb" secondAttribute="leading" constant="28" id="fWB-uV-Pp6"/>
                                             <constraint firstItem="sIx-OO-1Pa" firstAttribute="leading" secondItem="ZxH-Zb-g0Y" secondAttribute="leading" id="fpd-MH-wgG"/>
                                             <constraint firstItem="fWc-H4-pgc" firstAttribute="top" secondItem="ZxH-Zb-g0Y" secondAttribute="bottom" constant="8" id="h4U-zz-Om8"/>
                                             <constraint firstItem="76O-Bi-PNa" firstAttribute="top" secondItem="3i9-ZW-chj" secondAttribute="bottom" constant="8" id="kq0-zP-v8z"/>
                                             <constraint firstItem="sIx-OO-1Pa" firstAttribute="top" secondItem="4cr-37-Iqb" secondAttribute="top" constant="50" id="noR-bK-8Km"/>
                                             <constraint firstItem="3on-lg-EKk" firstAttribute="leading" secondItem="sIx-OO-1Pa" secondAttribute="leading" id="rCD-im-h0d"/>
+                                            <constraint firstItem="112-Kp-JAs" firstAttribute="top" secondItem="3on-lg-EKk" secondAttribute="bottom" constant="8" id="rkG-Y3-OZc"/>
                                             <constraint firstItem="ZxH-Zb-g0Y" firstAttribute="leading" secondItem="4cr-37-Iqb" secondAttribute="leading" constant="28" id="wUY-o1-fuD"/>
                                             <constraint firstItem="3i9-ZW-chj" firstAttribute="top" secondItem="d7u-1g-8fJ" secondAttribute="bottom" constant="8" id="zOB-CZ-r6R"/>
                                         </constraints>

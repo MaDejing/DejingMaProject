@@ -111,12 +111,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func pushToBottomTool(_ sender: AnyObject) {
-        let vc  = BottomToolViewController()
+        let vc = BottomToolViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
 	
 	@IBAction func pushToMultiDismiss(_ sender: AnyObject) {
-		let vc  = MultiDismissViewController()
+		let vc = MultiDismissViewController()
+		navigationController?.pushViewController(vc, animated: true)
+	}
+	
+	@IBAction func pushToMDJImageView(_ sender: AnyObject) {
+		let vc = MDJImageVC()
 		navigationController?.pushViewController(vc, animated: true)
 	}
 	

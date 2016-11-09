@@ -14,17 +14,7 @@ protocol MyPhotoPreviewCellDelegate: NSObjectProtocol {
 }
 
 class MyPhotoPreviewCell: UICollectionViewCell {
-		
-//    lazy var m_actIndicator: UIActivityIndicatorView = {
-//        var tempAct = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-//        
-//        tempAct.center = self.center
-//        tempAct.hidesWhenStopped = true
-//        tempAct.startAnimating()
-//        
-//        return tempAct
-//    }()
-//    
+	
 	fileprivate var m_scrollView: UIScrollView!
 	fileprivate var m_imageView: UIImageView!
     
@@ -65,7 +55,6 @@ class MyPhotoPreviewCell: UICollectionViewCell {
 		self.addSubview(m_scrollView)
 		m_scrollView.addSubview(m_imageView)
 		
-//        self.addSubview(m_actIndicator)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -80,17 +69,6 @@ class MyPhotoPreviewCell: UICollectionViewCell {
 		
 		let option = PHImageRequestOptions()
 		option.resizeMode = .fast
-//		option.progressHandler = {
-//			[weak self] progress, _, _, _ in
-//			
-//			guard let weakSelf = self else { return }
-//			
-//			DispatchQueue.main.async {
-//				weakSelf.m_scrollView.isHidden = true
-//				weakSelf.m_actIndicator.startAnimating()
-//				weakSelf.bringSubview(toFront: weakSelf.m_actIndicator)
-//			}
-//		}
 		
 		let _ = MyPhotoImageManager.defaultManager.getPhotoWithAsset(asset, size: size, options: option) {
 			[weak self] (image, _, _) in
@@ -111,8 +89,6 @@ class MyPhotoPreviewCell: UICollectionViewCell {
         imageResize()
         
         m_scrollView.isHidden = false
-//        m_actIndicator.stopAnimating()
-//        bringSubview(toFront: m_scrollView)
     }
 }
 

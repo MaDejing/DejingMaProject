@@ -44,7 +44,9 @@
 		CF4C128A1DAC859D00180AFA /* GridCellButtonSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF4C12881DAC859D00180AFA /* GridCellButtonSelected@2x.png */; };
 		CF4C128B1DAC859D00180AFA /* GridCellButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF4C12891DAC859D00180AFA /* GridCellButton@2x.png */; };
 		CF603ACA1DB85223001AA9E9 /* MultiDismissViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF603AC91DB85223001AA9E9 /* MultiDismissViewController.swift */; };
+		CF626A091DD2F91900D95607 /* MDJImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF626A081DD2F91900D95607 /* MDJImageVC.swift */; };
 		CF8BB1171DB46A4E008132C7 /* MySelectPhotoDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8BB1161DB46A4E008132C7 /* MySelectPhotoDoneButton.swift */; };
+		CFF09F071DD2D766000777C5 /* MDJImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF09F061DD2D766000777C5 /* MDJImageView.swift */; };
 		CFFD7BA21DADCA78004A72AF /* SysCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7BA11DADCA78004A72AF /* SysCameraViewController.swift */; };
 		F237A4DB1DB1F72F00A58730 /* PageEnableScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F237A4DA1DB1F72F00A58730 /* PageEnableScrollViewController.swift */; };
 		F237A4DE1DB3243600A58730 /* BottomToolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F237A4DD1DB3243600A58730 /* BottomToolViewController.swift */; };
@@ -157,7 +159,9 @@
 		CF4C12881DAC859D00180AFA /* GridCellButtonSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GridCellButtonSelected@2x.png"; sourceTree = "<group>"; };
 		CF4C12891DAC859D00180AFA /* GridCellButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GridCellButton@2x.png"; sourceTree = "<group>"; };
 		CF603AC91DB85223001AA9E9 /* MultiDismissViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiDismissViewController.swift; sourceTree = "<group>"; };
+		CF626A081DD2F91900D95607 /* MDJImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDJImageVC.swift; sourceTree = "<group>"; };
 		CF8BB1161DB46A4E008132C7 /* MySelectPhotoDoneButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySelectPhotoDoneButton.swift; sourceTree = "<group>"; };
+		CFF09F061DD2D766000777C5 /* MDJImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDJImageView.swift; sourceTree = "<group>"; };
 		CFFD7BA11DADCA78004A72AF /* SysCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SysCameraViewController.swift; sourceTree = "<group>"; };
 		F237A4DA1DB1F72F00A58730 /* PageEnableScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageEnableScrollViewController.swift; sourceTree = "<group>"; };
 		F237A4DD1DB3243600A58730 /* BottomToolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomToolViewController.swift; sourceTree = "<group>"; };
@@ -283,6 +287,7 @@
 				F237A4D91DB1F70A00A58730 /* Project06 */,
 				F237A4DC1DB321EB00A58730 /* Project07 */,
 				CF603AC81DB85202001AA9E9 /* Project08 */,
+				CFF09F051DD2D6BD000777C5 /* Project09 */,
 				CF31AAC91D9B5395002CF8E3 /* AppDelegate.swift */,
 				CF31AACB1D9B5395002CF8E3 /* ViewController.swift */,
 				F291DD291DB3719300220384 /* DejingMaProject-Bridging-Header.h */,
@@ -416,6 +421,15 @@
 				CF26778F1DB9B367000FFF97 /* Present02ViewController.swift */,
 			);
 			path = Project08;
+			sourceTree = "<group>";
+		};
+		CFF09F051DD2D6BD000777C5 /* Project09 */ = {
+			isa = PBXGroup;
+			children = (
+				CF626A081DD2F91900D95607 /* MDJImageVC.swift */,
+				CFF09F061DD2D766000777C5 /* MDJImageView.swift */,
+			);
+			path = Project09;
 			sourceTree = "<group>";
 		};
 		CFFD7BA01DADCA60004A72AF /* Project05 */ = {
@@ -735,6 +749,7 @@
 				F237A4DB1DB1F72F00A58730 /* PageEnableScrollViewController.swift in Sources */,
 				CF4C12851DAC785800180AFA /* MyPhotoPickerCell.swift in Sources */,
 				F291DD201DB36D8E00220384 /* String+YLCommonKit.swift in Sources */,
+				CFF09F071DD2D766000777C5 /* MDJImageView.swift in Sources */,
 				F291DD501DB3724A00220384 /* SDWebImageDownloaderOperation.m in Sources */,
 				F291DD261DB36D8E00220384 /* YLImageCollectionPageView.swift in Sources */,
 				F291DD4B1DB3724A00220384 /* NSData+ImageContentType.m in Sources */,
@@ -751,6 +766,7 @@
 				CF4C12691DAC781600180AFA /* HitTestScrollView.swift in Sources */,
 				F291DD221DB36D8E00220384 /* UIColor+YLCommonKit.swift in Sources */,
 				CF4C12821DAC785800180AFA /* MyPhotoImageManager.swift in Sources */,
+				CF626A091DD2F91900D95607 /* MDJImageVC.swift in Sources */,
 				CF45CD3A1D9CD8B200369340 /* State.swift in Sources */,
 				F291DD181DB36D8E00220384 /* UIImage+YLBaseKit.swift in Sources */,
 				F237A4E01DB32B1F00A58730 /* BottomToolView.swift in Sources */,
