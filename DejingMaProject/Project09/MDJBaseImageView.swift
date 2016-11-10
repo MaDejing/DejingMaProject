@@ -53,5 +53,42 @@ class MDJBaseImageView: UIView {
                                 progress: nil,
                                 completed: nil)
     }
+	
+	open func show(superView: UIView, startRect _rect: CGRect = CGRect.zero) {
+		superView.addSubview(self)
+		
+		if _rect != CGRect.zero {
+			let width = _rect.width
+			let height = _rect.height
+			let scale = CGAffineTransform(scaleX: width / UIScreen.mainWidth, y: height / UIScreen.mainHeight)
+			let translation = CGAffineTransform(translationX: _rect.minX - (UIScreen.mainWidth - width) / 2.0, y: _rect.minY - (UIScreen.mainHeight - height) / 2.0)
+			transform = scale.concatenating(translation)
+		}
+		
+		showWithAnimation()
+	}
+	
+	open func show(superView: UIView) {
+		superView.addSubview(self)
+		
+		showWithAnimation()
+	}
+	
+	open func save() {
+		guard let image = m_imageView.image else { return }
+		//调用方法保存到图像库中
+		UIImageWriteToSavedPhotosAlbum(image, self, nil, nil)
+	}
+	
+	fileprivate func showWithAnimation() {
+		UIView.animate(withDuration: 0.3, animations: { [weak self] in
+		let scale = CGAffineTransform(scaleX: 1.0, y: 1.0)
+		let translation = CGAffineTransform(translationX: 0.0, y: 0.0)
+		self?.transform = scale.concatenating(translation)
+		self?.alpha = 1.0
+		}) { (finished) in
+		
+		}
+	}
 
 }

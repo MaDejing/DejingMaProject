@@ -13,6 +13,7 @@ public enum MDJScrollImageViewMode : Int {
 	case toFill
 	case aspectFit
 	case aspectFill
+	case fitWidth
 }
 
 class MDJScrollImageView: MDJBaseImageView {
@@ -130,13 +131,14 @@ extension MDJScrollImageView {
     }
     
     func getCurRotation() -> CGFloat {
-        return m_rotation
+        return CGFloat(Double(m_rotation) * 180 / M_PI).truncatingRemainder(dividingBy: 360)
     }
 }
 
 extension MDJScrollImageView {
 	
 	func initImageSize() {
+		
 		m_scrollView.zoomScale = 1
 		
 		guard let img = m_imageView.image else { return }
@@ -155,12 +157,14 @@ extension MDJScrollImageView {
         case .toFill:
             resizeWithToFill(imgSize: imgSize, widthRatio: widthRatio, heightRatio: heightRatio)
 
+		case .fitWidth:
+			resizeWithFitWidth(imgSize: imgSize, widthRatio: widthRatio)
         }
         
         m_scrollView.contentOffset = CGPoint.zero
 	}
     
-    func resizeWithAspectFit(imgSize: CGSize, widthRatio: CGFloat, heightRatio: CGFloat) {
+    fileprivate func resizeWithAspectFit(imgSize: CGSize, widthRatio: CGFloat, heightRatio: CGFloat) {
         
         let ratio = max(widthRatio, heightRatio)
         
@@ -177,7 +181,7 @@ extension MDJScrollImageView {
         }
     }
     
-    func resizeWithAspectFill(imgSize: CGSize, widthRatio: CGFloat, heightRatio: CGFloat) {
+    fileprivate func resizeWithAspectFill(imgSize: CGSize, widthRatio: CGFloat, heightRatio: CGFloat) {
        
         m_imageView.contentMode = .scaleAspectFill
         
@@ -193,7 +197,7 @@ extension MDJScrollImageView {
         m_scrollView.contentSize = m_imageView.frame.size
     }
     
-    func resizeWithToFill(imgSize: CGSize, widthRatio: CGFloat, heightRatio: CGFloat) {
+    fileprivate func resizeWithToFill(imgSize: CGSize, widthRatio: CGFloat, heightRatio: CGFloat) {
         
         m_imageView.contentMode = .scaleToFill
         
@@ -201,7 +205,27 @@ extension MDJScrollImageView {
         m_imageView.center = m_scrollView.center
         m_scrollView.contentSize = m_imageView.frame.size
     }
-    
+	
+	fileprivate func resizeWithFitWidth(imgSize: CGSize, widthRatio: CGFloat) {
+		
+		m_imageView.contentMode = .scaleAspectFit
+		
+		let newSize = CGSize(width: imgSize.width / widthRatio, height: imgSize.height / widthRatio)
+		m_imageView.frame.size = newSize
+		
+		if (newSize.height <= m_scrollView.frame.size.height) {
+			m_imageView.center = m_scrollView.center
+			m_imageView.frame.origin.x = 0
+		} else {
+			m_imageView.frame.origin = CGPoint.zero
+		}
+		
+		m_scrollView.contentSize = CGSize(width: frame.width, height: max(frame.height, newSize.height))
+	}
+}
+
+extension MDJScrollImageView {
+	
 	// 把从scrollView里截取的矩形区域缩放到整个scrollView当前可视的frame里面。获取所要放大的内容的rect，以点击点为中心。因为放大scale倍，所以截取内容宽高为scrollview的1/scale。
 	fileprivate func zoomRectForScale(_ scale: CGFloat, center: CGPoint) -> CGRect {
 		var zoomRect: CGRect = CGRect.zero
@@ -215,6 +239,7 @@ extension MDJScrollImageView {
 		
 		return zoomRect;
 	}
+
 }
 
 extension MDJScrollImageView {
@@ -241,10 +266,11 @@ extension MDJScrollImageView {
 	}
 	
 	@objc fileprivate func rotationTap(_ ges: UIRotationGestureRecognizer) {
-		ges.view?.transform = CGAffineTransform(rotationAngle: m_rotation+ges.rotation)
-		if (ges.state == .ended) {
-			m_rotation += ges.rotation
-		}
+		ges.view?.transform = (ges.view?.transform.rotated(by: ges.rotation))!
+		
+		m_rotation += ges.rotation
+		
+		ges.rotation = 0.0
 	}
     
     @objc fileprivate func longPress(_ ges: UILongPressGestureRecognizer) {
@@ -255,6 +281,7 @@ extension MDJScrollImageView {
 }
 
 extension MDJScrollImageView: UIScrollViewDelegate {
+	
 	func viewForZooming(in scrollView: UIScrollView) -> UIView? {
 		return m_imageView
 	}
@@ -271,7 +298,6 @@ extension MDJScrollImageView: UIScrollViewDelegate {
 		ycenter = contentHeightLarger ? scrollView.contentSize.height/2 : ycenter
 		m_imageView.center = CGPoint(x: xcenter, y: ycenter)
 	}
-	
 }
 
 
