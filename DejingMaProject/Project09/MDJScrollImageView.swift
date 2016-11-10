@@ -30,7 +30,7 @@ class MDJScrollImageView: MDJBaseImageView {
 	
 	fileprivate var m_rotation: CGFloat = 0.0
 	
-	fileprivate var m_mode: MDJScrollImageViewMode = .aspectFit
+	fileprivate var m_mode: MDJScrollImageViewMode = .fitWidth
 		
 	lazy var m_singleTap: UITapGestureRecognizer = {
 		let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.singleTap))
@@ -116,21 +116,35 @@ class MDJScrollImageView: MDJBaseImageView {
 		m_maximumZoomScale = maxZoomScale
 		m_minimumZoomScale = minZoomScale
 	}
-	
+}
+
+extension MDJScrollImageView {
+    
     override func setWithImage(name: String) {
+        
         super.setWithImage(name: name)
         
-		initImageSize()
-	}
+        initImageSize()
+    }
+    
+    func setMode(mode: MDJScrollImageViewMode) {
+     
+        m_mode = mode
+        
+        initImageSize()
+    }
+    
 }
 
 extension MDJScrollImageView {
     
     func getZoomScale() -> CGFloat {
+        
         return m_scrollView.zoomScale
     }
     
     func getCurRotation() -> CGFloat {
+        
         return CGFloat(Double(m_rotation) * 180 / M_PI).truncatingRemainder(dividingBy: 360)
     }
 }
