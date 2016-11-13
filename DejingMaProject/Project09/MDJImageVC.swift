@@ -35,7 +35,7 @@ class MDJImageVC: UIViewController {
         button2.addTarget(self, action: #selector(MDJImageVC.changeSize(_:)), for: .touchUpInside)
         view.addSubview(button2)
         
-        conView = UIView(frame: CGRect(x: 0, y: 300, width: m_pageWidth, height: 300))
+        conView = UIView(frame: CGRect(x: 100, y: 400, width: 100, height: 200))
         conView.backgroundColor = UIColor.clear
         conView.clipsToBounds = true
         view.addSubview(conView)
@@ -75,7 +75,7 @@ class MDJImageVC: UIViewController {
     
     @objc fileprivate func changeSize(_ sender: UIButton) {
         let smallSize = CGRect(x: 100, y: 400, width: 100, height: 200)
-        conView.frame = conView.frame == smallSize ? CGRect(x: 0, y: 300, width: m_pageWidth+m_itemSpace, height: 300) : smallSize
+        conView.frame = conView.frame == smallSize ? CGRect(x: 0, y: 300, width: m_pageWidth, height: 300) : smallSize
         m_collectionView.frame = CGRect(x: 0, y: 0, width: conView.frame.width+m_itemSpace, height: conView.frame.height)
         (m_collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize = m_collectionView.frame.size
         
