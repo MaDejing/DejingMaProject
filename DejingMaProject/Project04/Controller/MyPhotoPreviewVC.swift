@@ -101,7 +101,7 @@ extension MyPhotoPreviewVC {
 		
 		collectionViewFlowLayout.minimumLineSpacing = m_minLineSpace
 		collectionViewFlowLayout.minimumInteritemSpacing = m_minItemSpace
-		collectionViewFlowLayout.itemSize = CGSize(width: kScreenWidth + 10, height: kScreenHeight)
+		collectionViewFlowLayout.itemSize = m_collectionView.frame.size
 		collectionViewFlowLayout.scrollDirection = .horizontal
 	
 		view.addSubview(m_collectionView)

@@ -10,16 +10,21 @@ import UIKit
 
 public enum MDJScrollImageViewMode : Int {
 	
+	/// 拉伸
 	case toFill
+    
+	/// 适应大小(图片展示全)
 	case aspectFit
+    
+	/// 不留白，会有裁剪
 	case aspectFill
+    
+	/// 适应宽度
 	case fitWidth
 }
 
 class MDJScrollImageView: MDJBaseImageView {
-	
-	fileprivate var m_scrollView: UIScrollView!
-	
+		
 	fileprivate var m_maximumZoomScale: CGFloat! = 2.0
 	fileprivate var m_minimumZoomScale: CGFloat! = 1.0
 	
@@ -67,52 +72,45 @@ class MDJScrollImageView: MDJBaseImageView {
 
 	override init(frame: CGRect) {
 		super.init(frame: frame)
-		
-		backgroundColor = UIColor.color(RGBHEX: 0x232329, alpha: 1.0)
-		clipsToBounds = true
         
-		m_scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
-		m_scrollView.backgroundColor = UIColor.red
-		m_scrollView.showsVerticalScrollIndicator = false
-		m_scrollView.showsHorizontalScrollIndicator = false
-		m_scrollView.delegate = self
-	}
-	
-	convenience init(frame: CGRect, mode: MDJScrollImageViewMode, maxZoomScale: CGFloat, minZoomScale: CGFloat) {
-		
-		self.init(frame: frame)
-		
-		commonInit(mode: mode, maxZoomScale: maxZoomScale, minZoomScale: minZoomScale)
-		
-		m_scrollView.maximumZoomScale = m_maximumZoomScale
-		m_scrollView.minimumZoomScale = m_minimumZoomScale
-		
-		if m_singleTapEnabled {
-			m_scrollView.addGestureRecognizer(m_singleTap)
-		}
-		
-		if m_doubleTapEnabled {
-			m_singleTap.require(toFail: m_doubleTap)
-			m_scrollView.addGestureRecognizer(m_doubleTap)
-		}
-		
-		if m_rotationTapEnabled {
+        m_scrollView.isScrollEnabled = true
+        m_scrollView.delegate = self
+        
+        if m_singleTapEnabled {
+            m_scrollView.addGestureRecognizer(m_singleTap)
+        }
+        
+        if m_doubleTapEnabled {
+            m_singleTap.require(toFail: m_doubleTap)
+            m_scrollView.addGestureRecognizer(m_doubleTap)
+        }
+        
+        if m_rotationTapEnabled {
             m_singleTap.require(toFail: m_rotationGes)
-			m_scrollView.addGestureRecognizer(m_rotationGes)
-		}
+            m_scrollView.addGestureRecognizer(m_rotationGes)
+        }
         
         if m_longPressEnabled {
             m_scrollView.addGestureRecognizer(m_longPress)
         }
-		
-		m_scrollView.addSubview(m_imageView)
-		addSubview(m_scrollView)
+        
+        m_scrollView.maximumZoomScale = m_maximumZoomScale
+        m_scrollView.minimumZoomScale = m_minimumZoomScale
 	}
 	
-	func commonInit(mode: MDJScrollImageViewMode, maxZoomScale: CGFloat, minZoomScale: CGFloat) {
-	
-		m_mode = mode
+	convenience init(frame: CGRect, maxZoomScale: CGFloat, minZoomScale: CGFloat) {
 		
+		self.init(frame: frame)
+		
+        m_maximumZoomScale = maxZoomScale
+        m_minimumZoomScale = minZoomScale
+        
+        m_scrollView.maximumZoomScale = maxZoomScale
+        m_scrollView.minimumZoomScale = minZoomScale
+    }
+	
+	func commonInit(maxZoomScale: CGFloat, minZoomScale: CGFloat) {
+        
 		m_maximumZoomScale = maxZoomScale
 		m_minimumZoomScale = minZoomScale
 	}
@@ -120,20 +118,7 @@ class MDJScrollImageView: MDJBaseImageView {
 
 extension MDJScrollImageView {
     
-    override func setWithImage(name: String) {
-        
-        super.setWithImage(name: name)
-        
-        initImageSize()
-    }
-    
-    func setMode(mode: MDJScrollImageViewMode) {
-     
-        m_mode = mode
-        
-        initImageSize()
-    }
-    
+
 }
 
 extension MDJScrollImageView {
@@ -151,7 +136,12 @@ extension MDJScrollImageView {
 
 extension MDJScrollImageView {
 	
-	func initImageSize() {
+	/// 根据mode设置图片大小
+	///
+	/// - parameter mode: 图片展示模式
+	open func setImageSize(with mode: MDJScrollImageViewMode) {
+        
+        m_mode = mode
 		
 		m_scrollView.zoomScale = 1
 		
@@ -259,14 +249,14 @@ extension MDJScrollImageView {
 extension MDJScrollImageView {
 	
 	@objc fileprivate func singleTap(_ ges: UITapGestureRecognizer) {
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
-            self?.alpha = 0.0
-        }) { [weak self] (finished) in
-            self?.removeFromSuperview()
-        }
+        print("single tap")
+
+        super.hide(duration: 0.3)
 	}
 	
 	@objc fileprivate func doubleTap(_ ges: UITapGestureRecognizer) {
+        print("double tap")
+
 		let newScale: CGFloat
 		
 		if m_scrollView.zoomScale == 1 {

@@ -96,6 +96,8 @@
 		F291DD5A1DB375F300220384 /* BottomToolViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F291DD591DB375F300220384 /* BottomToolViewConfig.swift */; };
 		F291DD5C1DB3884E00220384 /* BottomToolViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F291DD5B1DB3884E00220384 /* BottomToolViewButton.swift */; };
 		F2995C0D1DD374C400BBBA5E /* MDJBaseImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2995C0C1DD374C400BBBA5E /* MDJBaseImageView.swift */; };
+		F2995C0F1DD6D55100BBBA5E /* MDJCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2995C0E1DD6D55100BBBA5E /* MDJCollectionView.swift */; };
+		F2995C111DD6F3F000BBBA5E /* MDJScrollImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2995C101DD6F3F000BBBA5E /* MDJScrollImageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,6 +230,8 @@
 		F291DD591DB375F300220384 /* BottomToolViewConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomToolViewConfig.swift; sourceTree = "<group>"; };
 		F291DD5B1DB3884E00220384 /* BottomToolViewButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomToolViewButton.swift; sourceTree = "<group>"; };
 		F2995C0C1DD374C400BBBA5E /* MDJBaseImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDJBaseImageView.swift; sourceTree = "<group>"; };
+		F2995C0E1DD6D55100BBBA5E /* MDJCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDJCollectionView.swift; sourceTree = "<group>"; };
+		F2995C101DD6F3F000BBBA5E /* MDJScrollImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDJScrollImageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -431,6 +435,8 @@
 				CF626A081DD2F91900D95607 /* MDJImageVC.swift */,
 				F2995C0C1DD374C400BBBA5E /* MDJBaseImageView.swift */,
 				CFF09F061DD2D766000777C5 /* MDJScrollImageView.swift */,
+				F2995C0E1DD6D55100BBBA5E /* MDJCollectionView.swift */,
+				F2995C101DD6F3F000BBBA5E /* MDJScrollImageCell.swift */,
 			);
 			path = Project09;
 			sourceTree = "<group>";
@@ -737,6 +743,7 @@
 			files = (
 				CF26778E1DB9B2B8000FFF97 /* Present01ViewController.swift in Sources */,
 				F291DD541DB3724A00220384 /* UIImage+GIF.m in Sources */,
+				F2995C0F1DD6D55100BBBA5E /* MDJCollectionView.swift in Sources */,
 				F291DD1E1DB36D8E00220384 /* YLUnreadImageView.swift in Sources */,
 				F291DD4C1DB3724A00220384 /* SDImageCache.m in Sources */,
 				F291DD4F1DB3724A00220384 /* SDWebImageDownloader.m in Sources */,
@@ -813,6 +820,7 @@
 				CF4C126A1DAC781600180AFA /* MyRefreshView.swift in Sources */,
 				F291DD0E1DB36D8E00220384 /* YLLargeImageView.swift in Sources */,
 				F291DD5A1DB375F300220384 /* BottomToolViewConfig.swift in Sources */,
+				F2995C111DD6F3F000BBBA5E /* MDJScrollImageCell.swift in Sources */,
 				F291DD1F1DB36D8E00220384 /* NSString+YLCommonKit.swift in Sources */,
 				CF45CD361D9CD8B200369340 /* DefaultViewAnimator.swift in Sources */,
 				F2995C0D1DD374C400BBBA5E /* MDJBaseImageView.swift in Sources */,
