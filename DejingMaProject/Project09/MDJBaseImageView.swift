@@ -164,7 +164,6 @@ class MDJBaseImageView: UIView {
             self?.transform = scale.concatenating(translation)
             self?.alpha = 1.0
 		}) { (finished) in
-//            print(self?.frame, self?.transform)
 		}
 	}
 

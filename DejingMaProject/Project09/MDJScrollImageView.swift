@@ -24,20 +24,22 @@ public enum MDJScrollImageViewMode : Int {
 }
 
 class MDJScrollImageView: MDJBaseImageView {
-		
+    
+    public var m_singleTapEnabled = true
+    public var m_doubleTapEnabled = true
+    public var m_rotationTapEnabled = true
+    public var m_longPressEnabled = true
+    
 	fileprivate var m_maximumZoomScale: CGFloat! = 2.0
 	fileprivate var m_minimumZoomScale: CGFloat! = 1.0
-	
-	var m_singleTapEnabled = true
-	var m_doubleTapEnabled = true
-	var m_rotationTapEnabled = true
-    var m_longPressEnabled = true
 	
 	fileprivate var m_rotation: CGFloat = 0.0
 	
 	fileprivate var m_mode: MDJScrollImageViewMode = .fitWidth
-		
-	lazy var m_singleTap: UITapGestureRecognizer = {
+    
+    fileprivate var m_didSingleTap: (() -> Void)?
+    
+	lazy fileprivate var m_singleTap: UITapGestureRecognizer = {
 		let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.singleTap))
 		singleTap.numberOfTapsRequired = 1
 		singleTap.numberOfTouchesRequired = 1
@@ -45,7 +47,7 @@ class MDJScrollImageView: MDJBaseImageView {
 		return singleTap
 	}()
 	
-	lazy var m_doubleTap: UITapGestureRecognizer = {
+	lazy fileprivate var m_doubleTap: UITapGestureRecognizer = {
 		let doubleTap = UITapGestureRecognizer(target: self, action: #selector(self.doubleTap))
 		doubleTap.numberOfTapsRequired = 2
 		doubleTap.numberOfTouchesRequired = 1
@@ -53,13 +55,13 @@ class MDJScrollImageView: MDJBaseImageView {
 		return doubleTap
 	}()
 	
-	lazy var m_rotationGes: UIRotationGestureRecognizer = {
+	lazy fileprivate var m_rotationGes: UIRotationGestureRecognizer = {
 		let m_rotationGes = UIRotationGestureRecognizer(target: self, action: #selector(self.rotationTap))
 		
 		return m_rotationGes
 	}()
     
-    lazy var m_longPress: UILongPressGestureRecognizer = {
+    lazy fileprivate var m_longPress: UILongPressGestureRecognizer = {
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress))
         
         return longPress
@@ -109,7 +111,7 @@ class MDJScrollImageView: MDJBaseImageView {
         m_scrollView.minimumZoomScale = minZoomScale
     }
 	
-	func commonInit(maxZoomScale: CGFloat, minZoomScale: CGFloat) {
+	fileprivate func commonInit(maxZoomScale: CGFloat, minZoomScale: CGFloat) {
         
 		m_maximumZoomScale = maxZoomScale
 		m_minimumZoomScale = minZoomScale
@@ -118,17 +120,24 @@ class MDJScrollImageView: MDJBaseImageView {
 
 extension MDJScrollImageView {
     
-
-}
-
-extension MDJScrollImageView {
+    /// 设置单击事件
+    public var didSingleTap: (() -> Void)? {
+        set { m_didSingleTap = newValue }
+        get { return m_didSingleTap }
+    }
     
-    func getZoomScale() -> CGFloat {
+    /// 获取缩放倍数
+    ///
+    /// - returns: 缩放倍数
+    public func getZoomScale() -> CGFloat {
         
         return m_scrollView.zoomScale
     }
     
-    func getCurRotation() -> CGFloat {
+    /// 获取当前旋转角度（以度数为单位）
+    ///
+    /// - returns: 旋转角度
+    public func getCurRotation() -> CGFloat {
         
         return CGFloat(Double(m_rotation) * 180 / M_PI).truncatingRemainder(dividingBy: 360)
     }
@@ -139,7 +148,7 @@ extension MDJScrollImageView {
 	/// 根据mode设置图片大小
 	///
 	/// - parameter mode: 图片展示模式
-	open func setImageSize(with mode: MDJScrollImageViewMode) {
+	public func setImageSize(with mode: MDJScrollImageViewMode) {
         
         m_mode = mode
 		
@@ -251,7 +260,11 @@ extension MDJScrollImageView {
 	@objc fileprivate func singleTap(_ ges: UITapGestureRecognizer) {
         print("single tap")
 
-        super.hide(duration: 0.3)
+        if ((m_didSingleTap) != nil) {
+            m_didSingleTap?()
+        } else {
+            super.hide(duration: 0.3)
+        }
 	}
 	
 	@objc fileprivate func doubleTap(_ ges: UITapGestureRecognizer) {

@@ -37,10 +37,16 @@ class MDJScrollImageCell: UICollectionViewCell {
         m_imageCon.setImage(with: img)
         m_imageCon.setImageSize(with: m_mode)
         m_imageCon.setRadius(radius: 10.0)
+        
+        m_imageCon.didSingleTap = { [weak self] () -> Void in
+            guard let strongSelf = self else { return }
+            
+            print("single tap hhhhh")
+        }
     }
     
     public func imageResize() {
-        m_imageCon = MDJScrollImageView(frame: CGRect(x: 0, y: 0, width: frame.width-MDJScrollImageCell.m_spacing, height: frame.height))
+        m_imageCon.frame = CGRect(x: 0, y: 0, width: frame.width-MDJScrollImageCell.m_spacing, height: frame.height)
         m_imageCon.setImageSize(with: m_mode)
     }
 }
